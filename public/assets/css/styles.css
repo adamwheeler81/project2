@@ -1,0 +1,15 @@
+li {
+    list-style: none;
+}
+
+.srcImg {
+    height: 200px;
+    width: 200px;
+}
+
+.articleList {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 80vw;
+}
