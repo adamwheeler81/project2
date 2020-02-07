@@ -72,30 +72,27 @@ module.exports = function (app) {
         }).catch((err) => console.log('Whoops! ' + err));
     });
 
-    app.get("/api/articles/:id", function (req, res) {
-        /* db.Article.findOne({
-            where: {
-                id: req.params.id
-            }, include: [db.Post]
-        }).then(function (dbArticle) {
-            res.json(dbArticle);
-        }); */
-    });
-
-    app.post("/api/Articles", function (req, res) {
-        /* db.Article.create(req.body).then(function (dbArticle) {
-            res.json(dbArticle);
-        }); */
-    });
-
-    app.delete("/api/Articles/:id", function (req, res) {
-        /*  db.Article.destroy({
-             where: {
-                 id: req.params.id
-             }
-         }).then(function (dbArticle) {
-             res.json(dbArticle);
-         }); */
+    app.get("/api/articles/:search", function (req, res) {
+        newsapi.v2.everything({
+            q: req.params.search,
+            sortBy: 'popularity',
+            language: 'en'
+        }).then(response => {
+            console.log(response);
+            const resultObj = response.articles.map(item => {
+                const newObj = {
+                    title: item.title,
+                    author: item.author,
+                    url: item.url,
+                    urlToImage: item.urlToImage,
+                    publishedAt: item.publishedAt
+                }
+                return newObj;
+            });
+            res.render(
+                "index", { articles: resultObj }
+            );
+        }).catch((err) => console.log('Whoops! ' + err));
     });
 
 };
