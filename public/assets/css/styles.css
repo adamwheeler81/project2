@@ -1,0 +1,14 @@
+li {
+    list-style: none;
+}
+
+.urlToImage {
+    height: 150px;
+}
+
+.articleList {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 80vw;
+}

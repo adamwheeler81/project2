@@ -1,0 +1,19 @@
+{{> header }}
+
+{{#if category}}
+
+{{> category}}
+
+{{/ if }}
+
+{{#if saved}}
+
+{{> savedArticles }}
+
+{{ else }}
+
+{{> articleList }}
+
+{{/ if }}
+
+{{> footer }}
