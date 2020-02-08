@@ -28,7 +28,8 @@ app.use(express.static(__dirname + "/public"));
 
 // Routes
 // =============================================================
-require("./routes/article-routes.js")(app);
+require("./routes/newsapi-routes.js")(app);
+require("./routes/tickr-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
