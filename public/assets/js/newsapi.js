@@ -22,12 +22,11 @@ $(function () {
     // helper function for showing results of GET requests 
     // clears article-container div and loads the given url
     renderGet = function (url) {
-        $.ajax({
-            method: "GET",
-            url: url
-        }).then(result => {
+        $.get(url, result => {
+            //console.log(result);
             $('#article-container').empty();
             window.location.href = url;
         });
-    }
+    };
+
 })

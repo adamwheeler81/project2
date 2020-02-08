@@ -1,30 +1,33 @@
 $(function () {
 
     // show articles button
-    $('.savedBtn').on('click', (e) => {
+    $('.showSavedBtn').on('click', (e) => {
         const url = '/db/saved';
-        console.log('click show')
-        $.get(url, result => {
-            console.log(result);
-            $('#article-container').empty();
-            window.location.href = url;
-        });
+        renderGet(url);
     });
 
     // save button 
     $('.saveBtn').on('click', (e) => {
+        $(e.target).text('Saved!');
         const newObject = {
             author: $(e.target).siblings('.author').text(),
             title: $(e.target).siblings('.title').text(),
-            url: $(e.target).siblings('.url').text(),
-            urlToImage: $(e.target).siblings('.urlToImage').text()
+            url: $(e.target).siblings('.url').attr('href'),
+            urlToImage: $(e.target).siblings('.urlToImage').attr('src')
         };
-
         $.post("/db/save", newObject, () => {
-            console.log('saved new article');
-            window.location.href = '/db/saved';
+            window.location.href = '/';
         });
     });
 
+    // helper function for showing results of GET requests 
+    // clears article-container div and loads the given url
+    renderGet = function (url) {
+        $.get(url, result => {
+            //console.log(result);
+            $('#article-container').empty();
+            window.location.href = url;
+        });
+    };
 
 });

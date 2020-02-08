@@ -25,7 +25,6 @@ module.exports = function (app) {
     // GET  /api/top-articles
     //      Gets the day's top headlines sorted by popularity
     app.get('/', (req, res) => {
-
         newsapi.v2.topHeadlines({
             from: '2020-02-01',
             to: '2020-02-02',
@@ -35,22 +34,8 @@ module.exports = function (app) {
         }).then(result => {
             let i = 0;
             const resultObj = getResultObject(result);
-            /* const resultObj = result.articles.map(item => { //
-                const newObj = {
-                    apiId: i,
-                    title: item.title,
-                    author: item.author,
-                    source: item.source.name,
-                    description: item.description,
-                    url: item.url,
-                    urlToImage: item.urlToImage,
-                    publishedAt: item.publishedAt
-                }
-                i++;
-                return newObj;
-            }) */
             res.render(
-                "index", { category: false, articles: resultObj }
+                "index", { articles: resultObj }
             )
         }).catch((err) => console.log('Whoops! ' + err));
     })
@@ -82,7 +67,10 @@ module.exports = function (app) {
         }).catch((err) => console.log('Whoops! ' + err));
     });
 
-    // Helper function for building response object from query result
+
+
+    // Helper functions for building response object from query result
+    // parse results of newsapi queries
     getResultObject = function (result) {
         let i = 0;
         return result.articles.map(item => {
@@ -99,5 +87,5 @@ module.exports = function (app) {
             i++;
             return newObj;
         });
-    }
+    };
 };
