@@ -17,6 +17,6 @@
         "mysql2": "^1.6.4",
         "newsapi": "^2.4.0",
         "nodemon": "^2.0.2",
-        "sequelize": "^4.41.2"
+        "sequelize": "^5.21.4"
     }
 }

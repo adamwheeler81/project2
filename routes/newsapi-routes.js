@@ -7,10 +7,9 @@ const newsapi = new NewsAPI('49757bf9eb324e9190afc6ddb15b4eca');
     get: /api/top-articles - gets top articles all categories / countries / sources (default home page view?)
     get: /api/category/:category - takes argument from category drop down
     get: /api/search/:query - takes argument from search input element
-    get: /api/article/:id - retrieve a saved article by id
-
+    
     DB routes:
-    post: /api/db/save/{data-object} - checks article table for previous saved articles, 
+    post: /api/db/save/:apiId - checks article table for previous saved articles, 
                         saves article to table if it's not there, adds fk to user profile
     get: /api/db/article/:id - gets a saved article from the db
     get: /api/db/favorites - gets all saved articles from profile
@@ -25,26 +24,18 @@ module.exports = function (app) {
 
     // GET  /api/top-articles
     //      Gets the day's top headlines sorted by popularity
-    app.get('/api/top-articles', (req, res) => {
+    app.get('/', (req, res) => {
         newsapi.v2.topHeadlines({
             from: '2020-02-01',
             to: '2020-02-02',
             sortBy: 'popularity',
             language: 'en',
             country: 'us'
-        }).then(response => {
-            const resultObj = response.articles.map(item => {
-                const newObj = {
-                    title: item.title,
-                    author: item.author,
-                    url: item.url,
-                    urlToImage: item.urlToImage,
-                    publishedAt: item.publishedAt
-                }
-                return newObj;
-            });
+        }).then(result => {
+            let i = 0;
+            const resultObj = getResultObject(result);
             res.render(
-                "index", { category: false, articles: resultObj }
+                "index", { articles: resultObj }
             )
         }).catch((err) => console.log('Whoops! ' + err));
     })
@@ -55,44 +46,46 @@ module.exports = function (app) {
             sortBy: 'popularity',
             language: 'en',
             country: 'us'
-        }).then(response => {
-            const resultObj = response.articles.map(item => {
-                const newObj = {
-                    title: item.title,
-                    author: item.author,
-                    url: item.url,
-                    urlToImage: item.urlToImage,
-                    publishedAt: item.publishedAt
-                }
-                return newObj;
-            });
+        }).then(result => {
+            const resultObj = getResultObject(result);
             res.render(
                 "index", { category: true, categoryTitle: req.params.category, articles: resultObj }
             );
         }).catch((err) => console.log('Whoops! ' + err));
     });
 
-    app.get("/api/articles/:search", function (req, res) {
+    app.get("/api/search/:query", function (req, res) {
         newsapi.v2.everything({
-            q: req.params.search,
+            q: req.params.query,
             sortBy: 'popularity',
             language: 'en'
-        }).then(response => {
-            console.log(response);
-            const resultObj = response.articles.map(item => {
-                const newObj = {
-                    title: item.title,
-                    author: item.author,
-                    url: item.url,
-                    urlToImage: item.urlToImage,
-                    publishedAt: item.publishedAt
-                }
-                return newObj;
-            });
+        }).then(result => {
+            resultObj = getResultObject(result);
             res.render(
                 "index", { articles: resultObj }
             );
         }).catch((err) => console.log('Whoops! ' + err));
     });
 
+
+
+    // Helper functions for building response object from query result
+    // parse results of newsapi queries
+    getResultObject = function (result) {
+        let i = 0;
+        return result.articles.map(item => {
+            const newObj = {
+                apiId: i,
+                title: item.title,
+                author: item.author,
+                source: item.source.name,
+                description: item.description,
+                url: item.url,
+                urlToImage: item.urlToImage,
+                publishedAt: item.publishedAt
+            }
+            i++;
+            return newObj;
+        });
+    };
 };

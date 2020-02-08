@@ -1,0 +1,14 @@
+<div id="article-container">
+    <ul>
+        {{#each articles}}
+        <li class="articleList">
+            <div class="article">
+                <h2 class="title">{{ title }}</h2>
+                <h4 class="author">{{author}}</h4>
+                <a class="url" target="_blank" href={{ url}}>Link To Story</a>
+                <img class="urlToImage" src={{ urlToImage }}>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+</div>

@@ -1,15 +1,19 @@
 {{> header }}
-<ul>
-    {{#each example}}
-    <li class="articleList">
-        <div class="article">
-            <h2>{{ title }}</h2>
-            <h4>{{author}}</h4>
-            <a href={{ url}}>Link To Story</a>
-        </div>
-        <img class="srcImg" src={{ urlToImage }}>
-    </li cla>
-    {{/each}}
-</ul>
+
+{{#if category}}
+
+{{> category}}
+
+{{/ if }}
+
+{{#if saved}}
+
+{{> savedArticles }}
+
+{{ else }}
+
+{{> articleList }}
+
+{{/ if }}
 
 {{> footer }}
