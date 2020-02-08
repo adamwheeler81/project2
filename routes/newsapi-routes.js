@@ -11,6 +11,7 @@ const newsapi = new NewsAPI('49757bf9eb324e9190afc6ddb15b4eca');
     DB routes:
     post: /api/db/save/:apiId - checks article table for previous saved articles, 
                         saves article to table if it's not there, adds fk to user profile
+                        -- appId generated from article UTC_date + author + source
     get: /api/db/article/:id - gets a saved article from the db
     get: /api/db/favorites - gets all saved articles from profile
     get: /api/db/feed - gets all articles from the user's favorite categories
@@ -67,6 +68,21 @@ module.exports = function (app) {
         }).catch((err) => console.log('Whoops! ' + err));
     });
 
+    app.get("/api/favorites/:userId", function (req, res) {
+        db.Users.findOne({ where: { id: userId } }).then(result => {
+            newsapi.v2.everything({
+                q: result.favorites,
+                sortBy: 'popularity',
+                language: 'en'
+            }).then(result => {
+                resultObj = getResultObject(result);
+                res.render(
+                    "index", { articles: resultObj }
+                );
+            }).catch((err) => console.log('Whoops! ' + err));
+        })
+
+    });
 
 
     // Helper functions for building response object from query result
