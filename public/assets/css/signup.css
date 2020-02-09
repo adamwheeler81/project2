@@ -1,0 +1,24 @@
+body {
+	overflow: hidden;
+}
+
+.btn {
+	background-color: #3a4d54;	
+}
+
+.btn:hover {
+	background-color: #48c7f9;
+}
+
+.image {
+	position: relative;
+	height: 100vh;
+	background-image: url(../img/newspaper.jpg);
+	background-size: cover;
+	color: #f2f7f7;
+}
+
+.basic-info {
+    background: rgba(58, 77, 84, .75);
+    
+}
