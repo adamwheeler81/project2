@@ -18,8 +18,15 @@
     
     <div class="image">
       <div class="container">
-        <div class="row">
-          <div class="col-md-4 col-md-offset-3 basic-info">            
+        <div class="row form-1">
+          <div class="col-md-4 col-md-offset-3 basic-info">
+            <div class="welcome-text">
+            <br>
+            <h2>We're happy you're here!</h2>
+            <br>
+            <h5>We just need  little bit of info to customize your experience</h5>
+          </div>
+            <div class="info-inner">           
             <form class="signup">
               <div class="form-group">
                 <label for="first-name-input"></label>
@@ -35,7 +42,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="first-name-input"
+                  id="last-name-input"
                   placeholder="Last Name"
                 />
               </div>
@@ -62,7 +69,7 @@
                 <input
                   type="password"
                   class="form-control"
-                  id="password-input"
+                  id="password-confirm"
                   placeholder="Confirm Password"
                 />
               </div>
@@ -78,18 +85,76 @@
                 ></span>
                 <span class="sr-only">Error:</span> <span class="msg"></span>
               </div>
-              <button type="submit" class="btn btn-default">Next</button>
+              <button type="submit" class="btn btn-default" id="submit-1">Next</button>
             </form>
             <br />
             <p>Or log in <a href="/login">here</a></p>
+          </div> 
           </div>
+        </div>
+        <div class="row form-2">
+          <div class="welcome-text">
+            <br>
+            <h2>Great!</h2>
+            
+            <h5>Now we need to know what kind of news you're interested in</h5>
+          </div>
+          <form action="#">
+            <p>
+              <label>
+                <input type="checkbox" />
+                <span>Business</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" />
+                <span>Entertainment</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" />
+                <span>Health</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" />
+                <span>Science</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" />
+                <span>Sports</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" />
+                <span>Technology</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input type="checkbox" />
+                <span>Everything!</span>
+              </label>
+            </p>
+            <button type="submit" class="btn btn-default" id="submit-1">Previous</button>
+            <button type="submit" class="btn btn-default" id="submit-1">Next</button>
+          </form>
         </div>
       </div>
   </div>
     </body>
     <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
     <!--Custom JS -->
-    <link href="assets/assets/signup.js">
+    <script src="assets/js/signup.js"></script>
     </html>
 </html>

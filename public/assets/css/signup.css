@@ -19,6 +19,28 @@ body {
 }
 
 .basic-info {
-    background: rgba(58, 77, 84, .75);
-    
+    background: rgba(58, 77, 84, .75);   
+    text-align: center;
+    position: absolute;
+    margin-top: 7%;
+    margin-left: 12.5%;
+    border-radius: 10px;
+}
+
+.form-2 {
+    background: rgba(58, 77, 84, .75);   
+    text-align: center;
+    position: absolute;
+    margin-top: 7%;
+    margin-left: 12.5%;
+    border-radius: 10px;
+}
+
+
+.info-inner {
+    padding: 30px;  
+}
+
+.welcome-text {
+    padding: 30px;
 }
