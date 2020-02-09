@@ -1,23 +1,21 @@
 {{> header }}
 
+{{#if signup}}
+{{>signUpTest}}
+{{/if}}
+
 {{#if login}}
 {{> loginTest }}
 {{/if}}
 
 {{#if category}}
-
 {{> category}}
-
 {{/ if }}
 
 {{#if saved}}
-
 {{> savedArticles }}
-
 {{ else }}
-
 {{> articleList }}
-
 {{/ if }}
 
 {{> footer }}

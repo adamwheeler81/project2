@@ -1,5 +1,5 @@
 $(function () {
-
+console.log('loaded tickr.js');
     // show articles button
     $('.showSavedBtn').on('click', (e) => {
         const url = '/db/saved';

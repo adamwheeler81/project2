@@ -1,4 +1,6 @@
 $(function () {
+    console.log('loaded newsapi.js');
+    
     // show top-articles when the home button is clicked
     $('.homeBtn').on('click', (e) => {
         const url = "/"
