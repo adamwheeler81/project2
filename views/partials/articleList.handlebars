@@ -6,6 +6,14 @@
                 <h5 class="title">{{ title }}</h5>
                 <h6 class="author">{{author}}</h6>
                 <div class="clearfix">
+            <div class="article">
+                <h2 class="title">{{ title }}</h2>
+                <h5 class="publishedAt">{{ publishedAt }}</h5>
+                <h4 class="author">{{author}}</h4>
+                <h4 class="source">{{source}}</h4>
+                <p class="description">{{description}}</p>
+                <button class="saveBtn" data-id={{apiId}}>Save Article</button>
+                <a class="url" target="_blank" href={{ url}}>Link To Story</a>
                 <img class="urlToImage" src={{ urlToImage }} data-src={{ urlToImage }}>
             </div>
              <button class="saveBtn" data-id={{apiId}}>Save Article</button>
