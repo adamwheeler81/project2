@@ -2,12 +2,14 @@
     <ul>
         {{#each articles}}
         <li class="articleList">
-            <div class="article">
-                <h2 class="title">{{ title }}</h2>
-                <h4 class="author">{{author}}</h4>
-                <button class="saveBtn" data-id={{apiId}}>Save Article</button>
-                <a class="url" target="_blank" href={{ url}}>Link To Story</a>
+            <div class="article-card">
+                <h5 class="title">{{ title }}</h5>
+                <h6 class="author">{{author}}</h6>
+                <div class="clearfix">
                 <img class="urlToImage" src={{ urlToImage }} data-src={{ urlToImage }}>
+            </div>
+             <button class="saveBtn" data-id={{apiId}}>Save Article</button>
+                <button class="url" target="_blank" href={{ url}}>Read This Story</button>
             </div>
         </li>
         {{/each}}
