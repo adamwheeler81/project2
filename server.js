@@ -41,12 +41,14 @@ app.use(passport.session());
 // =============================================================
 //require("./routes/newsapi-routes.js")(app);
 //require("./routes/tickr-routes.js")(app);
-//require("./routes/user-routes.js")(app);
+require("./routes/user-routes.js")(app);
 require("./routes/html-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() {
+//db.sequelize.sync({ force: true }).then(function() {
+// Remove force option to keep tables when server loads
+db.sequelize.sync().then(function() {
 	app.listen(PORT, function() {
 		console.log("App listening on PORT " + PORT);
 	});

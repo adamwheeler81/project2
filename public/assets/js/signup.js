@@ -1,65 +1,85 @@
 $(document).ready(function() {
-	const userInfo = {};
+	const firstNameInput = $("#first-name-input");
+	const lastNameInput = $("#last-name-input");
+	const emailInput = $("#email-input");
+	const passwordInput = $("#password-input");
+	const passwordConfirmInput = $("#password-confirm");
 
-	const firstName = $("#first-name-input");
-	const lastName = $("#last-name-input");
-	const email = $('#email-input');
-	const password = $("#password-input");
-	const passwordConfirm = $("#password-confirm");
+	// login button on home screen to login with existing account
+	$("#loginBtn").on("click", e => {
+		const userData = {
+			email: emailInput.val().trim(),
+			password: passwordInput.val().trim()
+		};
 
+		if (!userData.email || !userData.password) {
+			return;
+		}
+
+		// If we have an email and password we run the loginUser function and clear the form
+		loginUser(userData.email, userData.password);
+		emailInput.val("");
+		passwordInput.val("");
+	});
+
+	//
 	$("#signUpBtn").on("click", e => {
-		console.log("signup /signup");
 		renderNext("/signup", "");
 	});
 
-	$("#submit-1").click((event) => {
+	// Sign Up button on homepage
+	$("#submit-1").click(event => {
 		event.preventDefault();
-		console.log('signup submit-1 signupform!');
+		console.log("signup submit-1 signupform!");
 		var userData = {
-		  email: email.val().trim(),
-		  firstName: firstName.val().trim(),
-		  lastName: lastName.val().trim(),
-		  password: password.val().trim(),
-		  passwordConfim: passwordConfirm.val().trim()
+			email: emailInput.val().trim(),
+			firstName: firstNameInput.val().trim(),
+			lastName: lastNameInput.val().trim(),
+			password: passwordInput.val().trim(),
+			passwordConfim: passwordConfirmInput.val().trim()
 		};
-	
+
 		if (!userData.email || !userData.password) {
-		  return;
+			return;
 		}
 		// If we have an email and password, run the signUpUser function
 		signUpUser(userData.email, userData.password, userData.firstName, userData.lastName);
-		email.val("");
-		password.val("");
-		firstName.val("");
-		lastName.val("");
-		passwordConfirm.val("");
-	  });
+		emailInput.val("");
+		passwordInput.val("");
+		firstNameInput.val("");
+		lastNameInput.val("");
+		passwordConfirmInput.val("");
+	});
 
+	// Next button on category select screen
+	// put selected categories in user table and navigate to country select screen
 	$("#submit-2").click(function() {
 		let newArr = [];
 		const checkboxes = $("input[type='checkbox']");
-		for ( let i = 0; i < checkboxes.length; i++ ) {
-		  if ($(checkboxes[i]).prop("checked")) {
-			  newArr.push( { title: $(checkboxes[i]).val() } );
-		  }
+		for (let i = 0; i < checkboxes.length; i++) {
+			if ($(checkboxes[i]).prop("checked")) {
+				newArr.push({ title: $(checkboxes[i]).val() });
+			}
 		}
 		renderNext("/signup", "countrySelect", newArr);
 	});
 
+	// Next button on country select screen
+	// put country in user table and show profile with custom feed
 	$("#submit-3").click(function() {
 		let newArr = [];
 		const checkboxes = $("input[type='checkbox']");
-		for ( let i = 0; i < checkboxes.length; i++ ) {
-		  if ($(checkboxes[i]).prop("checked")) {
-			  newArr.push( { name: $(checkboxes[i]).val() } );
-		  }
+		for (let i = 0; i < checkboxes.length; i++) {
+			if ($(checkboxes[i]).prop("checked")) {
+				newArr.push({ name: $(checkboxes[i]).val() });
+			}
 		}
-		console.log('send user info to auth');
-		console.log(req.body)
+		console.log("send user info to auth");
+		console.log(req.body);
 		// send all user info to the database and attempt to sign up
 		$.post("/api/signup", req.body, () => {
-			// 			
-			window.location.href = '/profile';
+			//
+			window.location.href = "/profile";
 		});
 	});
 	/* 
@@ -83,27 +103,29 @@ $(document).ready(function() {
 			url = url + "/" + page;
 			$.post(url, data, result => {
 				window.location.href = url;
-				
 			});
 		}
-		
 	};
 
 	// Does a post to the signup route. If successful, we are redirected to the members page
-	  // Otherwise we log any errors
-	  signUpUser = function (email, password, firstName, lastName) {
-		  console.log('signupjs signupuser')
+	// Otherwise we log any errors
+	signUpUser = function(email, password, firstName, lastName) {
 		$.post("/api/signup", {
-		  email: email,
-		  password: password,
-		  firstName: firstName,
-		  lastName: lastName
-		})
-		  .then(data => {
-			  console.log('added user')
-			  console.log(data);
+			email: email,
+			password: password,
+			firstName: firstName,
+			lastName: lastName
+		}).then(data => {
 			window.location.replace("/profile");
-			
-		  })
-	  }
+		});
+	};
+
+	loginUser = function(email, password) {
+		$.post("/api/login", {
+			email: email,
+			password: password
+		}).then(data => {
+			window.location.href = "/profile";
+		});
+	};
 });
