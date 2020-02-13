@@ -1,5 +1,5 @@
 body {
-	overflow: hidden;
+	overflow: scroll;
 }
 
 .btn {
@@ -13,7 +13,7 @@ span {
 .checkboxes {
     position: relative;
     text-align: left;
-    margin-left: 27%;
+    margin-left: auto;
 }
 
 .btn:hover {
@@ -24,7 +24,7 @@ span {
 	position: relative;
 	height: 100vh;
 	background-image: url(../img/newspaper.jpg);
-	background-size: cover;
+    background-size: cover;
 	color: #f2f7f7;
 }
 
