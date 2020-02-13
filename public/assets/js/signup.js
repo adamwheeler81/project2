@@ -19,12 +19,13 @@ $(document).ready(function() {
 
 	$("#submit-2").click(function() {
 		const checkboxes = $("input[type='checkbox']");
-		const checkedCategories = checkboxes.map(item => {
+		/* const checkedCategories = checkboxes.map(item => {
 			if (item.is(":checked")) {
 				return { name: item.val() };
 			}
-		});
-		console.log(checkedCategories);
+		}); */
+		//console.log(checkedCategories);
+		console.log(checkboxes);
 		console.log(userInfo);
 		renderNext("/signup", "countrySelect");
 	});
@@ -41,14 +42,18 @@ $(document).ready(function() {
 
 	renderNext = function(url, page, data) {
 		if (typeof data == "undefined") {
-			$.post(url, result => {
+			console.log('renderNext data undefined')
+			$.get(url, result => {
 				window.location.href = url;
 				return;
 			});
 		}
 		url = url + "/" + page;
-		$.post(url, data, result => {
+		$.get(url, data, result => {
+			// post to keep persistent body data...
+			console.log('renderNext');
 			window.location.href = url;
+			
 		});
 	};
 });

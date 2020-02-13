@@ -83,9 +83,19 @@ module.exports = function(app) {
 		res.render("index", { signup: true, userInfo: true });
 	});
 
-	app.post("/signup/categorySelect", (req, res) => {
-		console.log(req.body);
+	app.get("/signup/categorySelect", (req, res) => {
+		console.log('get signup categorySelect')
 		res.render("index", { signup: true, categorySelect: true, categories: categories });
+	})
+
+	app.get("/signup/countrySelect", (req, res) => {
+		console.log('get signup countrySelect')
+		res.render("index", { signup: true, countrySelect: true, countries: countries });
+	})
+
+	app.post("/signup/categorySelect", (req, res) => {
+		console.log('post signup categorySelect')
+		console.log(req.body);
 	});
 
 	app.post("/signup/countrySelect", (req, res) => {
