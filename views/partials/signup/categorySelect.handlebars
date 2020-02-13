@@ -1,0 +1,35 @@
+<div class="row form-2">
+  <div class="row category-text">
+    <br>
+    <h2>Great!</h2>
+    <h5>Now we need to know what kind of news you're interested in</h5>
+  </div>
+  <div class="row checkboxes">
+    <!-- <form class="category-selector" action="#"></form> -->
+    <form class="category-selector" action="#"></form>
+    <div class="col">
+      {{#each categories.col1}}
+      <p>
+        <label>
+          <input type="checkbox" />
+          <span>{{title}}</span>
+        </label>
+      </p>
+      {{/each}}
+    </div>
+    <div class="col">
+      {{#each categories.col2}}
+      <p>
+        <label>
+          <input type="checkbox" />
+          <span>{{title}}</span>
+        </label>
+      </p>
+      {{/each}}
+    </div>
+  </div>
+  <button type="button" class="btn btn-default" id="previous-1">Previous</button>
+  <!--<a href="/signup/countrySelect"><button type="button" class="btn btn-default" id="submit-2">Next</button></a>-->
+  <button type="button" class="btn btn-default" id="submit-2">Next</button>
+  </form>
+</div>

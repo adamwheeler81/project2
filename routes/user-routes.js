@@ -1,38 +1,47 @@
-var db = require("../models");
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const db = require("../models");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 
-// Passport Local Strategy
-passport.use(new LocalStrategy(
-    function (username, password, done) {
-        db.User.findOne({ username: username }, function (err, user) {
-            if (err) { return done(err); }
-            if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
-            }
-            if (!user.validPassword(password)) {
-                return done(null, false, { message: 'Incorrect password.' });
-            }
-            return done(null, user);
-        });
-    }
-));
+module.exports = function(app) {
+	// Route for logging user out
+	app.get("/logout", function(req, res) {
+		req.logout();
+		res.redirect("/");
+	});
 
+	// Using the passport.authenticate middleware with our local strategy.
+	// If the user has valid login credentials, send them to the members page.
+	// Otherwise the user will be sent an error
+	app.post("/login", passport.authenticate("local"), (req, res) => {
+		res.json(req.user);
+	});
 
-module.exports = function (app) {
-    // show login page
-    app.get('/login', (req, res) => {
-        res.render(
-            "index", { login: true }
-        )
-    })
+	// signup route
+	app.post("/signup", function(req, res) {
+		db.User.create({
+			email: req.body.email,
+			password: req.body.password
+		})
+			.then(() => {
+				res.redirect("/db/saved");
+			})
+			.catch(err => {
+				res.status(401).json(err);
+			});
+	});
 
-    // validate user login and redirect to profile
-    app.post('/login',
-        passport.authenticate('local', {
-            successRedirect: '/db/saved', // redirect to user profile / custom feed on successful login
-            failureRedirect: '/'
-        })
-    );
-
+	// Route for getting some data about our user to be used client side
+	app.get("/profile", function(req, res) {
+		if (!req.user) {
+			// The user is not logged in, send back an empty object
+			res.json({});
+		} else {
+			// Otherwise send back the user's email and id
+			// Sending back a password, even a hashed password, isn't a good idea
+			res.json({
+				email: req.user.email,
+				id: req.user.id
+			});
+		}
+	});
 };
