@@ -12,13 +12,24 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: true
       }
     },
+      firstName: {
+        type: DataTypes.STRING
+      },
+      lastName: {
+        type: DataTypes.STRING
+      },
     // The password cannot be null
     password: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    favorites: {
-      type: DataTypes.STRING
+    categories: {
+      type: DataTypes.STRING,
+      alowNull: true
+    },
+    countries: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
