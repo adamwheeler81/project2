@@ -1,0 +1,53 @@
+<div class="form-3">
+  <div class="row country-text">
+    <br>
+    <h2>You're almost there!</h2>
+    <h5>Just let us know what countries you'd like to receive your news from</h5>
+  </div>
+  <div class="row checkboxes">
+    <form class="country-selector" action="#">
+      <div class="col">
+        {{#each countries.col1}}
+        <p>
+          <label>
+            <input type="checkbox" />
+            <span>{{name}}</span>
+          </label>
+        </p>
+        {{/each}}
+      </div>
+      <div class="col">
+        {{#each countries.col2}}
+        <p>
+          <label>
+            <input type="checkbox" />
+            <span>{{name}}</span>
+          </label>
+        </p>
+        {{/each}}
+      </div>
+      <div class="col">
+        {{#each countries.col3}}
+        <p>
+          <label>
+            <input type="checkbox" />
+            <span>{{name}}</span>
+          </label>
+        </p>
+        {{/each}}
+      </div>
+      <div class="col">
+        {{#each countries.col4}}
+        <p>
+          <label>
+            <input type="checkbox" />
+            <span>{{name}}</span>
+          </label>
+        </p>
+        {{/each}}
+      </div>
+  </div>
+  <button type="buttpn" class="btn btn-default" id="previous-2">Previous</button>
+  <button type="submit" class="btn btn-default" id="submit-3">Next</button>
+  </form>
+</div>
