@@ -90,27 +90,20 @@ module.exports = function(app) {
 	});
 
 	app.get("/signup/categorySelect", isAuthenticated, (req, res) => {
-		console.log("get signup categorySelect");
 		res.render("index", { signup: true, categorySelect: true, categories: categories });
 	});
 
 	app.get("/signup/countrySelect", isAuthenticated, (req, res) => {
-		console.log("get signup countrySelect");
-		console.log(req.body);
 		res.render("index", { signup: true, countrySelect: true, countries: countries });
 	});
 
 	app.post("/signup/categorySelect", isAuthenticated, (req, res) => {
-		console.log("post signup categorySelect");
-		console.log(req.body);
 		// put categories in user table
 		postCategories(req.body);
 		res.redirect("/signup/countrySelect");
 	});
 
 	app.post("/signup/countrySelect", isAuthenticated, (req, res) => {
-		console.log("post signup countrySelect");
-		console.log(req.body);
 		res.redirect("/profile");
 	});
 };

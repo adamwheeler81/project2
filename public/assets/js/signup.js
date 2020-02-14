@@ -34,7 +34,6 @@ $(document).ready(function() {
 	// Sign Up button on homepage
 	$("#submit-1").click(event => {
 		event.preventDefault();
-		console.log("signup submit-1 signupform!");
 		var userData = {
 			email: emailInput.val().trim(),
 			firstName: firstNameInput.val().trim(),

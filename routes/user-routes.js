@@ -7,7 +7,6 @@ module.exports = function(app) {
 	// get the user profile. 
 	// triggered when user logs in through landing page or completes the signup process
 	app.get("/profile", isAuthenticated, (req, res) => {
-		console.log('user routes get profile');
 		// get favorites, categories, countries, etc. from user table then use them to build the custom feed...
 		db.User.findOne({
 			where: {
@@ -26,8 +25,6 @@ module.exports = function(app) {
 			const userCategories = newArr.map(item => {
 				return { title: item }
 			});
-			console.log('user routes get profile userInfo');
-			console.log(userCategories);
 			//getUserFeed(userCategories);
 			res.render("index", { profile: true, user: userInfo, categories: userCategories });
 		});
@@ -35,7 +32,6 @@ module.exports = function(app) {
 
 	// gets user data for use elsewhere..
 	app.get("/api/user_data", (req, res) => {
-		console.log('user routes api user_data');
 		if (!req.user) {
 			// The user is not logged in, send back an empty object
 			res.json({});
@@ -74,8 +70,6 @@ module.exports = function(app) {
 
 	// Interact with newsapi to get feed
 	const getUserFeed = function(userInfo) {
-		console.log('user routes getUserFeed: ');
-		console.log(userInfo);
 		app.get("/api/feed", (req, res) => {
 			//res.render("index", { profile: true, user: userInfo, articles: res.articles });
 			console.log(res.articles);
@@ -91,7 +85,6 @@ module.exports = function(app) {
 
 	// User login
 	app.post("/api/login", passport.authenticate("local"), (req, res) => {
-		console.log('user routes api login')
 		res.json(req.user);
 	});
 

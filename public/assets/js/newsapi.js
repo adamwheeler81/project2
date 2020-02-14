@@ -3,7 +3,6 @@ $(function() {
 	// clears article-container div and loads the given url
 	renderGet = function(url) {
 		$.get(url, result => {
-			//console.log(result);
 			$("#article-container").empty();
 			window.location.href = url;
 		});
@@ -11,7 +10,7 @@ $(function() {
 
 	// show top-articles when the home button is clicked
 	$(".homeBtn").on("click", e => {
-		const url = "/api/feed";
+		const url = "/profile";
 		renderGet(url);
 	});
 
@@ -28,7 +27,7 @@ $(function() {
 		const url = "/api/search/" + searchVal;
 		renderGet(url);
 	});
-	//console.log(req.user);
+	
 	// get default feed when the profile page opens
 	/* $.get('/api/feed', result => {
 		window.location.href = '/profile';
