@@ -5,7 +5,9 @@ body {
 }
 h1 {
     text-align: center;
+    color: #3a4d54
 }
+
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;
@@ -34,7 +36,7 @@ input[type=text], select {
   padding: 2px 16px;
 }
 .searchBtn {
-    background-color: #778899;
+    
     border: none;
     border-radius: 12px;
     color: white;
@@ -46,14 +48,15 @@ input[type=text], select {
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
+    line-height: normal;
 }
 .searchBtn:hover {
-    background-color: #555555;
+    background-color: #48c7f9;
     color: white;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 button {
-    background-color: #778899;
+    background-color: #3a4d54;
     border: none;
     border-radius: 12px;
     color: white;
@@ -66,14 +69,14 @@ button {
     transition-duration: 0.4s;
     cursor: pointer;
 }
-button:hover {
+.btn:hover {
     background-color: #555555;
     color: white;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 li {
-    list-style: none;
-
+    float: left;
+    margin: 10px;
 }
 
 .urlToImage {
@@ -89,6 +92,7 @@ li {
     width: 100vw;
     float: left;
     padding: 10px;
+    margin: 10px;
 }
 .clearfix::after {
     content: "";
@@ -97,10 +101,10 @@ li {
   }
 ul {
     list-style-type: none;
-    margin: 10px;
-    padding: 10px;
+    padding-left: 10px;
     overflow: hidden;
-    background-color: #f2f7f7;
+    align-items: center;
+
 }
 .searchBar {
     margin: 10px;
@@ -108,11 +112,18 @@ ul {
 }
 input[type=submit] {
     width: 100%;
-    background-color: #778899;
+    background-color: #3a4d54;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-  }
+    line-height: 0px;
+}
+.btn {
+	background-color: #3a4d54;	
+}
+
+.btn:hover {
+	background-color: #48c7f9;
+}
