@@ -1,5 +1,12 @@
 body {
-	overflow: scroll;
+   
+	background-image: url(../img/newspaper.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 60px 0px;
+  }
 }
 
 .btn {
@@ -10,60 +17,57 @@ span {
     color: #f2f7f7; 
 }
 
+
 .checkboxes {
     position: relative;
     text-align: left;
     margin-left: auto;
+
 }
 
 .btn:hover {
 	background-color: #48c7f9;
 }
 
-.image {
-	position: relative;
-	height: 100vh;
-	background-image: url(../img/newspaper.jpg);
-    background-size: cover;
-	color: #f2f7f7;
-}
 
-.basic-info {
+
+.form-1 {
     background: rgba(58, 77, 84, .75);   
     text-align: center;
-    position: absolute;
-    margin-top: 7%;
-    margin-left: 12.5%;
+    position: relative;
     border-radius: 10px;
+    margin: 0 auto;
+    width: 60%;
 }
 
 .form-2 {
     background: rgba(58, 77, 84, .75);   
     text-align: center;
-    position: absolute;
-    margin-top: 7%;
-    margin-left: 12.5%;
+    position: relative;
     border-radius: 10px;
     color: #f2f7f7; 
     padding: 20px;
+    margin: 0 auto;
+    width: 20vw;
 }
 
 .form-3 {
     background: rgba(58, 77, 84, .75);   
     text-align: center;
-    position: absolute;
-    margin-top: 3%;
-    margin-left: 7%;
+    position: relative;
+    margin: 0 auto;
     border-radius: 10px;
     color: #f2f7f7; 
     padding: 20px;
     width: 55vw;
+    align-content: center;
 }
 
 
 
 .info-inner {
     padding: 30px;  
+    margin: 0 auto;
 }
 
 .welcome-text {
@@ -71,5 +75,13 @@ span {
 }
 
 .checkboxes {
-  margin-left: 22%;
+margin: 0 auto;
+}
+
+.btn {
+    background-color: rgb(58, 77, 84);
+}
+
+.btn:hover {
+   background-color: rgb(72, 199, 249);
 }
