@@ -1,10 +1,33 @@
+<style>
+    .btn {
+	background-color: #3a4d54;	
+}
+
+.btn:hover {
+	background-color: #48c7f9;
+}
+ul {
+    align-items: center;
+}
+
+</style>
+
 <h1>Tickr</h1>
 
-<div class="nav">
-    <button class="homeBtn">Home</button>
-    <button class="showSavedBtn">Saved Articles</button>
-    <button class="categoryBtn" data-category="Technology">Technology</button>
-    <button class="categoryBtn" data-category="Sports">Sports</button>
-    <button class="categoryBtn" data-category="Business">Business</button>
-    <input type="text" id="search" placeholder="Search the news"><input type="submit" id="searchBtn" class="searchBtn">
+<div class="nav-wrapper">
+    <ul>
+    <li><button class="btn btn-default homeBtn">Home</button></li>
+    <li><button class="btn btn-default">Saved Articles</button></li>
+    <li><button class="btn btn-default categoryBtn" data-category="Technology">Technology</button></li>
+    <li><button class="btn btn-default categoryBtn" data-category="Sports">Sports</button></li>
+    <li><button class="btn btn-default categoryBtn" data-category="Business">Business</button></li>
+    <li><button class="btn btn-default categoryBtn" data-category="Entertainment">Entertainment</button></li>
+    <li><button class="btn btn-default categoryBtn" data-category="Health">Health</button></li>
+    <li><button class="btn btn-default categoryBtn" data-category="Science">Science</button></li>
+    </ul>
+    <div class="searchBar">
+          <input type="text" id="search" placeholder="Search the news"><input type="submit" id="btn btn-default" class="btn btn-default">
+    </div>
+    
+
 </div>

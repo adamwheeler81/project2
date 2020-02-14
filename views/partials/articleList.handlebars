@@ -12,12 +12,12 @@
                 <h4 class="author">{{author}}</h4>
                 <h4 class="source">{{source}}</h4>
                 <p class="description">{{description}}</p>
-                <button class="saveBtn" data-id={{apiId}}>Save Article</button>
-                <a class="url" target="_blank" href={{ url}}>Link To Story</a>
+                <button class="btn btn-default" data-id={{apiId}}>Save Article</button>
+                <a class="url" target="_blank" href={{ url}}><button class="url btn btn-default" target="_blank">Read This Story</button></a>
                 <img class="urlToImage" src={{ urlToImage }} data-src={{ urlToImage }}>
             </div>
-             <button class="saveBtn" data-id={{apiId}}>Save Article</button>
-                <button class="url" target="_blank" href={{ url}}>Read This Story</button>
+            
+                
             </div>
         </li>
         {{/each}}
