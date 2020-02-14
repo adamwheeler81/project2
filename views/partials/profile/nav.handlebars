@@ -1,10 +1,8 @@
-<h1>Tickr</h1>
-
 <div class="nav">
     <button class="homeBtn">Home</button>
     <button class="showSavedBtn">Saved Articles</button>
-    <button class="categoryBtn" data-category="Technology">Technology</button>
-    <button class="categoryBtn" data-category="Sports">Sports</button>
-    <button class="categoryBtn" data-category="Business">Business</button>
+    {{#each categories}}
+    <button class="categoryBtn" data-category="{{title}}">{{title}}</button>
+    {{/each}}
     <input type="text" id="search" placeholder="Search the news"><input type="submit" id="searchBtn" class="searchBtn">
 </div>

@@ -22,13 +22,14 @@ const newsapi = new NewsAPI("49757bf9eb324e9190afc6ddb15b4eca");
 */
 
 module.exports = function(app) {
+	console.log('newsapi route get api feed');
 	// GET  /api/top-articles
 	//      Gets the day's top headlines sorted by popularity
 	app.get("/api/feed", (req, res) => {
+		console.log('newsapi route get api feed');
+		console.log(req.body)
 		newsapi.v2
 			.topHeadlines({
-				from: "2020-02-01",
-				to: "2020-02-02",
 				sortBy: "popularity",
 				language: "en",
 				country: "us"
@@ -39,6 +40,7 @@ module.exports = function(app) {
 				// return results
 				//res.render("index", { articles: resultObj });
 				res.json({ articles: resultObj });
+				
 			})
 			.catch(err => console.log("Whoops! " + err));
 	});

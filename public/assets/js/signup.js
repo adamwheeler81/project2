@@ -15,7 +15,7 @@ $(document).ready(function() {
 		if (!userData.email || !userData.password) {
 			return;
 		}
-
+		console.log('signupjs login')
 		// If we have an email and password we run the loginUser function and clear the form
 		loginUser(userData.email, userData.password);
 		emailInput.val("");
@@ -25,6 +25,10 @@ $(document).ready(function() {
 	//
 	$("#signUpBtn").on("click", e => {
 		renderNext("/signup", "");
+		/* $.get("/signup", result => {
+			console.log('signupjs get signup')
+			window.location.href = "/signup";
+		}); */
 	});
 
 	// Sign Up button on homepage
@@ -56,12 +60,21 @@ $(document).ready(function() {
 	$("#submit-2").click(function() {
 		let newArr = [];
 		const checkboxes = $("input[type='checkbox']");
+		// create new array to store categories
 		for (let i = 0; i < checkboxes.length; i++) {
 			if ($(checkboxes[i]).prop("checked")) {
-				newArr.push({ title: $(checkboxes[i]).val() });
+				newArr.push($(checkboxes[i]).val());
 			}
 		}
-		renderNext("/signup", "countrySelect", newArr);
+		//put category data in db 
+		// convert array to string
+		$.ajax({
+			url: '/api/user/categories',
+			type: 'PUT',
+			data: {categories: newArr.toString()}
+		 }).then(result => {
+			window.location.href = "/signup/countrySelect";
+		 });
 	});
 
 	// Next button on country select screen
@@ -69,18 +82,21 @@ $(document).ready(function() {
 	$("#submit-3").click(function() {
 		let newArr = [];
 		const checkboxes = $("input[type='checkbox']");
+		// create new array to store countries
 		for (let i = 0; i < checkboxes.length; i++) {
 			if ($(checkboxes[i]).prop("checked")) {
-				newArr.push({ name: $(checkboxes[i]).val() });
+				newArr.push($(checkboxes[i]).val());
 			}
 		}
-		console.log("send user info to auth");
-		console.log(req.body);
-		// send all user info to the database and attempt to sign up
-		$.post("/api/signup", req.body, () => {
-			//
+		//put country data in db 
+		// convert array to string
+		$.ajax({
+			url: '/api/user/countries',
+			type: 'PUT',
+			data: {countries: newArr.toString()}
+		 }).then(result => {
 			window.location.href = "/profile";
-		});
+		 });
 	});
 	/* 
 	$("#previous-1").click(function() {
@@ -116,7 +132,8 @@ $(document).ready(function() {
 			firstName: firstName,
 			lastName: lastName
 		}).then(data => {
-			window.location.replace("/profile");
+			//window.location.replace("/profile");
+			window.location.replace("/signup/categorySelect");
 		});
 	};
 
