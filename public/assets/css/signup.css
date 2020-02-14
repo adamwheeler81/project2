@@ -76,6 +76,10 @@ span {
 
 .checkboxes {
 margin: 0 auto;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+justify-content: center;
 }
 
 .btn {
@@ -84,4 +88,9 @@ margin: 0 auto;
 
 .btn:hover {
    background-color: rgb(72, 199, 249);
+}
+
+.country {
+    display: inline-block;
+    width: 170px;
 }
