@@ -1,38 +1,79 @@
-var db = require("../models");
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const db = require("../models");
+const passport = require("passport");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 
-// Passport Local Strategy
-passport.use(new LocalStrategy(
-    function (username, password, done) {
-        db.User.findOne({ username: username }, function (err, user) {
-            if (err) { return done(err); }
-            if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
-            }
-            if (!user.validPassword(password)) {
-                return done(null, false, { message: 'Incorrect password.' });
-            }
-            return done(null, user);
-        });
-    }
-));
+module.exports = function(app) {
+	// USER / DATABASE ROUTES
+	app.get("/profile", isAuthenticated, (req, res) => {
+		// get favorites, categories, countries, etc. from user table then use them to build the custom feed...
+		db.User.findOne({
+			where: {
+				id: req.user.id
+			}
+		}).then(result => {
+			const userInfo = {
+				firstName: result.firstName,
+				lastName: result.lastName,
+				email: result.email
+			};
+			// use user preferences to get feed from newsapi
+			//getUserFeed(userInfo);
+			//res.render("index", { profile: true, user: userInfo, articles: articles });
+			res.render("index", { profile: true, user: userInfo });
+		});
+	});
 
+	app.get("/api/user_data", (req, res) => {
+		if (!req.user) {
+			// The user is not logged in, send back an empty object
+			res.json({});
+		} else {
+			// Otherwise send back the user's info
+			res.json({
+				firstName: req.user.fistName,
+				lastName: req.user.lastName,
+				email: req.user.email,
+				id: req.user.id
+			});
+		}
+	});
 
-module.exports = function (app) {
-    // show login page
-    app.get('/login', (req, res) => {
-        res.render(
-            "index", { login: true }
-        )
-    })
+	// Interact with newsapi to get feed
+	const getUserFeed = function(userInfo) {
+		app.get("/api/feed", (req, res) => {
+			console.log("user routes getuserfeed: ");
+			console.log(res.articles);
+			res.render("index", { profile: true, user: userInfo, articles: res.articles });
+		});
+	};
 
-    // validate user login and redirect to profile
-    app.post('/login',
-        passport.authenticate('local', {
-            successRedirect: '/db/saved', // redirect to user profile / custom feed on successful login
-            failureRedirect: '/'
-        })
-    );
+	// LOGON, LOGOFF, AND SIGNUP
+	// User log out
+	app.get("/api/logout", function(req, res) {
+		req.logout();
+		res.redirect("/");
+	});
 
+	// User login
+	app.post("/api/login", passport.authenticate("local"), (req, res) => {
+		res.json(req.user);
+	});
+
+	// Initial sign up route
+	// Just name, email, and password
+	// Add feed details in separate routes
+	app.post("/api/signup/", (req, res) => {
+		db.User.create({
+			email: req.body.email,
+			password: req.body.password,
+			firstName: req.body.firstName,
+			lastName: req.body.lastName
+		})
+			.then(() => {
+				res.redirect(307, "/api/login");
+			})
+			.catch(err => {
+				res.status(401).json(err);
+			});
+	});
 };
