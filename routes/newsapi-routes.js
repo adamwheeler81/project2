@@ -4,8 +4,6 @@ const newsapi = new NewsAPI("49757bf9eb324e9190afc6ddb15b4eca");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
-	// GET  /api/top-articles
-	//      Gets the day's top headlines sorted by popularity
 	app.get("/api/feed", isAuthenticated, (req, res) => {
 		newsapi.v2
 			.topHeadlines({

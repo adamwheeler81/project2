@@ -53,7 +53,6 @@ module.exports = function(app) {
 				userCategories.push({ title: "Everything" });
 			}
 			// newsapi call to get feed inside of profile
-			console.log("user routes profile");
 			newsapi.v2
 				.topHeadlines({
 					category: "Technology",
@@ -85,6 +84,45 @@ module.exports = function(app) {
 		}
 	});
 
+	// Get user favorites
+	app.get('/api/favorites', isAuthenticated, (req, res) => {
+		const articlesArr = [];
+		db.User.findOne({ 
+			where: {
+				id: req.user.id
+			}
+		}).then(result => {
+			// get just the favorites column
+			let favorites = result.favorites
+			// split in to array
+			favorites = favorites.split(',');
+			// now loop over array and get the associated article from the articles table:
+			favorites.forEach(item => {
+				db.Article.findOne({
+					where: {
+						articleId: item
+					}
+				}).then(result => {
+					// send result to profile 
+					console.log('user routes get api favorites get article results');
+					console.log(result);
+					articlesArr.push({
+						title: result.title,
+						author: result.author,
+						source: result.source,
+						description: result.description,
+						url: result.url,
+						urlToImage: result.urlToImage,
+						publishedAt: result.publishedAt
+					});
+				})
+				
+			})
+		}).then(	
+			res.render("index", { profile: true, articles: articlesArr } )
+		);
+	});
+
 	// Put category data in user table when signing up
 	app.put("/api/user/categories", function(req, res) {
 		db.User.update({ categories: req.body.categories }, { where: { id: req.user.id } }).then(
@@ -103,13 +141,34 @@ module.exports = function(app) {
 		);
 	});
 
-	// Interact with newsapi to get feed
-	const getUserFeed = function(userInfo) {
-		app.get("/api/feed", (req, res) => {
-			//res.render("index", { profile: true, user: userInfo, articles: res.articles });
-			console.log(res.articles);
-		});
-	};
+	// Add saved article to user favorites
+	app.post('/api/update_favorites', isAuthenticated, (req, res) => {
+        // get user favorites
+        db.User.findOne({
+            where: {
+                id: req.user.id
+            }
+        }).then(result => {
+			// get articleId
+			let favorites = req.body.articleId;
+			// if data already exists in favorites column append it
+			if ( result.dataValues.favorites ) {
+				favorites += ',';
+            	favorites += result.dataValues.favorites;
+			}
+            // update value in table
+            db.User.update(
+                { favorites: favorites },
+                {
+                    where: {
+                        id: req.user.id
+                    }
+                }
+            ).then(() => {
+                    // stay on page
+            })
+        })
+    })
 
 	// LOGON, LOGOFF, AND SIGNUP
 	// User log out
@@ -120,8 +179,6 @@ module.exports = function(app) {
 
 	// User login
 	app.post("/api/login", passport.authenticate("local"), (req, res) => {
-		console.log("user routes /login this user:");
-		console.log(req.user.id);
 		res.json(req.user);
 	});
 

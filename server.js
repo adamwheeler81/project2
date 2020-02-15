@@ -40,7 +40,7 @@ app.use(passport.session());
 // Routes
 // =============================================================
 require("./routes/newsapi-routes.js")(app);
-//require("./routes/tickr-routes.js")(app);
+require("./routes/tickr-routes.js")(app);
 require("./routes/user-routes.js")(app);
 require("./routes/html-routes.js")(app);
 

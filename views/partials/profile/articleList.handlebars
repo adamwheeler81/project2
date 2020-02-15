@@ -6,18 +6,17 @@
                 <h5 class="title">{{ title }}</h5>
                 <h6 class="author">{{author}}</h6>
                 <div class="clearfix">
-            <div class="article">
-                <h2 class="title">{{ title }}</h2>
-                <h5 class="publishedAt">{{ publishedAt }}</h5>
-                <h4 class="author">{{author}}</h4>
-                <h4 class="source">{{source}}</h4>
-                <p class="description">{{description}}</p>
-                <button class="btn btn-default" data-id={{apiId}}>Save Article</button>
-                <a class="url" target="_blank" href={{ url}}><button class="url btn btn-default" target="_blank">Read This Story</button></a>
-                <img class="urlToImage" src={{ urlToImage }} data-src={{ urlToImage }}>
-            </div>
-            
-                
+                    <div class="article">
+                        <h2 class="title">{{ title }}</h2>
+                        <h5 class="publishedAt">{{ publishedAt }}</h5>
+                        <h4 class="author">{{author}}</h4>
+                        <h4 class="source">{{source}}</h4>
+                        <p class="description">{{description}}</p>
+                        <button class="btn btn-default save-btn " data-id={{apiId}}>Save Article</button>
+                        <a class="url" target="_blank" href={{ url}}><button class="url btn btn-default" target="_blank">Read This Story</button></a>
+                        <img class="urlToImage" src={{ urlToImage }} data-src={{ urlToImage }}>
+                    </div>
+                </div>
             </div>
         </li>
         {{/each}}
