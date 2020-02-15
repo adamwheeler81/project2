@@ -1,8 +1,9 @@
 <div class="nav-wrapper">
+    <div class="row">
     <div class="image nav-item">
         <img src="/public/assets/img/logo2.png" alt="Logo">
     </div>
-    <div class="button-array nav-item">
+   
     <ul class ="category-list nav-item">
     <li><button class="btn btn-default homeBtn">Home</button></li>
     <li><button class="btn btn-default get-saved-btn">Saved Articles</button></li>
@@ -13,12 +14,24 @@
     <li><button class="btn btn-default categoryBtn" data-category="Health">Health</button></li>
     <li><button class="btn btn-default categoryBtn" data-category="Science">Science</button></li>
     </ul>
+
+    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Select a Country</a>
+
+  <!-- Dropdown Structure -->
+    <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!">United States</a></li>
+        <li><a href="#!">Wherever</a></li>     
     </div>
-    <div class="searchBar nav-item">
-          <input type="text" id="search" placeholder="Search the news">
+
+    <div class="row">
+    <div class="searchBar">
+        <div class="search-item">
+        <input  type="text" id="search" placeholder="Search the news">
+        </div>
+        <div class="search-item">
+        <input  id="search-button" type="submit" id="btn btn-default" class="btn btn-default">
+        </div>
     </div>
-    <div class="search-button nav-item">
-        <input type="submit" id="btn btn-default" class="btn btn-default">
     </div>
 </div>
 
