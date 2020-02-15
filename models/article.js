@@ -6,7 +6,8 @@ module.exports = function (sequelize, DataTypes) {
         description: DataTypes.STRING,
         url: DataTypes.STRING,
         urlToImage: DataTypes.STRING,
-        publishedAt: DataTypes.DATE
+        publishedAt: DataTypes.DATE,
+        articleId: DataTypes.STRING
     });
 
     return Article;

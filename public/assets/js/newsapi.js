@@ -1,7 +1,16 @@
 $(function() {
+	// helper function for showing results of GET requests
+	// clears article-container div and loads the given url
+	renderGet = function(url) {
+		$.get(url, result => {
+			$("#article-container").empty();
+			window.location.href = url;
+		});
+	};
+
 	// show top-articles when the home button is clicked
 	$(".homeBtn").on("click", e => {
-		const url = "/";
+		const url = "/profile";
 		renderGet(url);
 	});
 
@@ -18,14 +27,10 @@ $(function() {
 		const url = "/api/search/" + searchVal;
 		renderGet(url);
 	});
+	
+	// get default feed when the profile page opens
+	/* $.get('/api/feed', result => {
+		window.location.href = '/profile';
+	}); */
 
-	// helper function for showing results of GET requests
-	// clears article-container div and loads the given url
-	renderGet = function(url) {
-		$.get(url, result => {
-			//console.log(result);
-			$("#article-container").empty();
-			window.location.href = url;
-		});
-	};
 });
