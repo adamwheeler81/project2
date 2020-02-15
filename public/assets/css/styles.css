@@ -8,6 +8,20 @@ h1 {
     color: #3a4d54
 }
 
+.nav-item {
+    display: inline-block;
+    margin: auto;
+}
+
+.nav-wrapper {
+    background-color: lightgray;
+}
+
+.button-array {
+    margin: 10px auto;
+}
+
+
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;
@@ -24,6 +38,7 @@ input[type=text], select {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   padding: 10px;
+  width: 100%;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -65,7 +80,7 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: auto ;
     transition-duration: 0.4s;
     cursor: pointer;
 }
@@ -89,7 +104,7 @@ li {
 
 .articleList {
     flex-direction: row;
-    width: 80vw;
+    width: 70vw;
     float: left;
     padding: 10px;
     margin: 10px;
@@ -104,11 +119,11 @@ ul {
     padding-left: 10px;
     overflow: hidden;
     align-items: center;
-
+    width: fit-content;
+    margin: auto;
 }
-.searchBar {
-    margin: 10px;
-    padding: 10px;
+.search-item {
+    display: inline-block;
 }
 input[type=submit] {
     width: 100%;
@@ -138,4 +153,8 @@ input[type=submit] {
     line-height: 15px;
     text-transform: uppercase;
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+ }
+
+ .dropdown-content {
+     width: 100px;
  }

@@ -1,6 +1,10 @@
-<h1>Tickr</h1>
 <div class="nav-wrapper">
-    <ul>
+    <div class="row">
+    <div class="image nav-item">
+        <img src="/public/assets/img/logo2.png" alt="Logo">
+    </div>
+   
+    <ul class ="category-list nav-item">
     <li><button class="btn btn-default homeBtn">Home</button></li>
     <li><button class="btn btn-default get-saved-btn">Saved Articles</button></li>
     {{# each categories}}
@@ -10,8 +14,24 @@
     <li>{{title}}</li>
     {{/each}}
     </ul>
+
+    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Select a Country</a>
+
+  <!-- Dropdown Structure -->
+    <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!">United States</a></li>
+        <li><a href="#!">Wherever</a></li>     
+    </div>
+
+    <div class="row">
     <div class="searchBar">
-          <input type="text" id="search" placeholder="Search the news"><input type="submit" id="btn btn-default" class="btn btn-default">
+        <div class="search-item">
+        <input  type="text" id="search" placeholder="Search the news">
+        </div>
+        <div class="search-item">
+        <input  id="search-button" type="submit" id="btn btn-default" class="btn btn-default">
+        </div>
+    </div>
     </div>
 </div>
 
