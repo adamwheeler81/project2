@@ -12,8 +12,7 @@ const categories = {
 	col2: [{ title: "Sports" }, { title: "Technology" }, { title: "Everything!" }]
 };
 
-const countries = {
-	col1: [
+const countries = [	
 		{ name: "Argentina" },
 		{ name: "Australia" },
 		{ name: "Austria" },
@@ -26,9 +25,7 @@ const countries = {
 		{ name: "Cuba" },
 		{ name: "Czech Republic" },
 		{ name: "Egypt" },
-		{ name: "France" }
-	],
-	col2: [
+		{ name: "France" },
 		{ name: "Germany" },
 		{ name: "Greece" },
 		{ name: "Hong Kong" },
@@ -41,9 +38,7 @@ const countries = {
 		{ name: "Japan" },
 		{ name: "Latvia" },
 		{ name: "Lithuania" },
-		{ name: "Malaysia" }
-	],
-	col3: [
+		{ name: "Malaysia" },	
 		{ name: "Mexico" },
 		{ name: "Morocco" },
 		{ name: "Netherlands" },
@@ -56,9 +51,7 @@ const countries = {
 		{ name: "Romania" },
 		{ name: "Russia" },
 		{ name: "Saudi Arabia" },
-		{ name: "Serbia" }
-	],
-	col4: [
+		{ name: "Serbia" },
 		{ name: "Singapore" },
 		{ name: "South Africa" },
 		{ name: "South Korea" },
@@ -71,9 +64,8 @@ const countries = {
 		{ name: "Ukraine" },
 		{ name: "United Kingdom" },
 		{ name: "United States" },
-		{ name: "Venezuela" }
-	]
-};
+		{ name: "Venezuela" },
+];
 
 module.exports = function(app) {
 	// LOGIN AND SIGNUP FORMS
