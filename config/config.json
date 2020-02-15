@@ -1,11 +1,7 @@
 {
     "development": {
         "username": "root",
-<<<<<<< HEAD
         "password": "Wordup8.",
-=======
-        "password": "password123!",
->>>>>>> cd538287b1e0e67daa2809b9b1bf155e4885af7b
         "database": "tickr",
         "host": "127.0.0.1",
         "port": 3306,
