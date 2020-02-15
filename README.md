@@ -21,4 +21,5 @@ A MYSQL database called 'Tickr" needs to be created along with a config.json con
 CSS used:
 Materialize CSS
 
-Ideas for future development:
+
+Slideshow presentation link: https://docs.google.com/presentation/d/1n3---Wv6lzACx1w-lfM9C0NcFJBhUluBjw_pKIR6un0/edit?usp=sharing
