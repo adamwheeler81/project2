@@ -25,10 +25,6 @@ $(document).ready(function() {
 	//
 	$("#signUpBtn").on("click", e => {
 		renderNext("/signup", "");
-		/* $.get("/signup", result => {
-			console.log('signupjs get signup')
-			window.location.href = "/signup";
-		}); */
 	});
 
 	// Sign Up button on homepage

@@ -10,7 +10,9 @@
                         <h5 class="publishedAt">{{ publishedAt }}</h5>
                         <h4 class="author">{{author}}</h4>
                         <p class="description">{{description}}</p>
+                        {{# unless saved }}
                         <button class="btn btn-default save-btn " data-id={{apiId}}>Save Article</button>
+                        {{/unless}}
                         <a class="url" target="_blank" href={{ url}}><button class="url btn btn-default" target="_blank">Read This Story</button></a>
                         <img class="urlToImage" src={{ urlToImage }} data-src={{ urlToImage }}>
                     </div>
