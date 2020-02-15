@@ -33,11 +33,12 @@ span {
 
 .form-1 {
     background: rgba(58, 77, 84, .75);   
+    color: #f2f7f7; 
     text-align: center;
     position: relative;
     border-radius: 10px;
     margin: 0 auto;
-    width: 60%;
+    width: 55%;
 }
 
 .form-2 {
@@ -48,7 +49,11 @@ span {
     color: #f2f7f7; 
     padding: 20px;
     margin: 0 auto;
-    width: 20vw;
+    width: 45%;
+}
+
+.category-selector {
+    margin: 0 auto;
 }
 
 .form-3 {
@@ -84,6 +89,7 @@ justify-content: center;
 
 .btn {
     background-color: rgb(58, 77, 84);
+    margin: 5px;
 }
 
 .btn:hover {
