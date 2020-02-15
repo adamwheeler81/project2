@@ -7,12 +7,12 @@
     <ul class ="category-list nav-item">
     <li><button class="btn btn-default homeBtn">Home</button></li>
     <li><button class="btn btn-default get-saved-btn">Saved Articles</button></li>
-    <li><button class="btn btn-default categoryBtn" data-category="Technology">Technology</button></li>
-    <li><button class="btn btn-default categoryBtn" data-category="Sports">Sports</button></li>
-    <li><button class="btn btn-default categoryBtn" data-category="Business">Business</button></li>
-    <li><button class="btn btn-default categoryBtn" data-category="Entertainment">Entertainment</button></li>
-    <li><button class="btn btn-default categoryBtn" data-category="Health">Health</button></li>
-    <li><button class="btn btn-default categoryBtn" data-category="Science">Science</button></li>
+    {{# each categories}}
+    <li><button class="btn btn-default categoryBtn" data-category="{{title}}">{{title}}</button></li>
+    {{/each}}
+    {{#each countries}}
+    <li>{{title}}</li>
+    {{/each}}
     </ul>
 
     <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Select a Country</a>
