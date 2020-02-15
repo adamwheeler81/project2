@@ -30,7 +30,10 @@ module.exports = function(app) {
 	// get the user profile.
 	// triggered when user logs in through landing page or completes the signup process
 	app.get("/profile", isAuthenticated, (req, res) => {
-		let userCategories = [];
+		const searchParams = {
+			sortBy: "popularity",
+			language: "en"
+		};
 		// get favorites, categories, countries, etc. from user table then use them to build the custom feed...
 		db.User.findOne({
 			where: {
@@ -41,28 +44,38 @@ module.exports = function(app) {
 				firstName: result.firstName,
 				lastName: result.lastName,
 				email: result.email,
-				countries: result.countries
+				countries: result.countries,
+				categories: result.categories
 			};
 			// convert categories in to an array so we can loop through it...
 			if (result.categories) {
 				const newArr = result.categories.split(",");
-				newArr.forEach(item => {
-					userCategories.push({ title: item });
-				});
-			} else {
-				userCategories.push({ title: "Everything" });
+				var userCategories = newArr.map(item => {
+					return { title: item };
+				})
+			}
+			// same for countries
+			if (result.countries) {
+				const newArr = result.countries.split(",");
+				var userCountries = newArr.map(item => {
+					return { title: item };
+				})
+				// use first country as default for profile feed
+				searchParams.country = newArr[0];
 			}
 			// newsapi call to get feed inside of profile
 			newsapi.v2
-				.topHeadlines({
-					sortBy: "popularity",
-					language: "en",
-					country: "us"
-				})
+				.topHeadlines(searchParams)
 				.then(result => {
 					const resultObj = getResultObject(result);
 					// return results
-					res.render("index", { profile: true, user: userInfo, articles: resultObj });
+					res.render("index", { 
+						profile: true, 
+						user: userInfo, 
+						categories: userCategories, 
+						countries: userCountries, 
+						articles: resultObj 
+					});
 				});
 		});
 	});

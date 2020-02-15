@@ -4,7 +4,6 @@ $(function () {
     $('.get-saved-btn').on('click', (e) => {
         // get the article matching articleId from the articles table
         $.get('/api/favorites', (req, res) => {
-            console.log(res);
             window.location.href = '/api/favorites';
         })
     });
@@ -21,11 +20,11 @@ $(function () {
         const newObject = {
             author: saveAuthor,
             source: saveSource,
-            description: $(e.target).siblings('.title').data('description'),
+            description: $(e.target).siblings('.description').text(),
             publishedAt: savePulishedAt,
             title: $(e.target).siblings('.title').text(),
             url: $(e.target).siblings('.url').attr('href'),
-            urlToImage: $(e.target).siblings('.srcImg').attr('src'),
+            urlToImage: $(e.target).siblings('.urlToImage').data('src'),
             articleId: articleId.replace(/[-,:\.\s]/g, '')
         };
         updateUserFavorites(newObject.articleId);
