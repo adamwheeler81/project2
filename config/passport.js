@@ -17,7 +17,6 @@ passport.use(
 					email: email
 				}
 			}).then(function(dbUser) {
-				console.log("passport loggin in...");
 				// If there's no user with the given email
 				if (!dbUser) {
 					return done(null, false, {

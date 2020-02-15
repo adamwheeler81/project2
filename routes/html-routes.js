@@ -85,6 +85,10 @@ module.exports = function(app) {
 		res.render("index", { login: true });
 	});
 
+	app.get("/loginFailed", (req, res) => {
+		res.render("index", { login: true, failed: true });
+	});
+
 	app.get("/signup", (req, res) => {
 		res.render("index", { signup: true, userInfo: true });
 	});

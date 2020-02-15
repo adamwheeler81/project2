@@ -14,17 +14,14 @@ module.exports = function(app) {
 				country: "us"
 			})
 			.then(result => {
-				let i = 0;
 				const resultObj = getResultObject(result);
 				// return results
-				//res.render("index", { articles: resultObj });
-				res.json({ articles: resultObj });
-				
+				res.render("index", { profile: true, articles: resultObj });
 			})
 			.catch(err => console.log("Whoops! " + err));
 	});
 
-	app.get("/api/category/:category", isAuthenticated, (req, res) => {
+	app.get("/api/category/:category", (req, res) => {
 		newsapi.v2
 			.topHeadlines({
 				category: req.params.category,
