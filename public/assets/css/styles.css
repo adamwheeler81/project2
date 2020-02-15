@@ -8,6 +8,10 @@ h1 {
     color: #3a4d54
 }
 
+.logo {
+    margin: 0, auto;
+}
+
 .nav-item {
     display: inline-block;
     margin: auto;
@@ -20,6 +24,7 @@ h1 {
 .button-array {
     margin: 10px auto;
 }
+
 
 
 input[type=text], select {
@@ -107,8 +112,12 @@ li {
     width: 70vw;
     float: left;
     padding: 10px;
-    margin: 10px;
+    
 }
+#unorderedArticle {
+    margin: 0 auto;
+}
+
 .clearfix::after {
     content: "";
     clear: both;
@@ -120,11 +129,13 @@ ul {
     overflow: hidden;
     align-items: center;
     width: fit-content;
-    margin: auto;
+    margin-top: 20px;
 }
+
 .search-item {
-    display: inline-block;
+    margin-bottom: 20px;
 }
+
 input[type=submit] {
     width: 100%;
     background-color: #3a4d54;
