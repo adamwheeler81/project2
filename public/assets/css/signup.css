@@ -94,3 +94,7 @@ justify-content: center;
     display: inline-block;
     width: 170px;
 }
+
+.country-text {
+    margin: 0 auto;
+}
