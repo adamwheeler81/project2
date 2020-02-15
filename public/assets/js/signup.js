@@ -15,7 +15,6 @@ $(document).ready(function() {
 		if (!userData.email || !userData.password) {
 			return;
 		}
-		console.log('signupjs login')
 		// If we have an email and password we run the loginUser function and clear the form
 		loginUser(userData.email, userData.password);
 		emailInput.val("");
@@ -80,7 +79,10 @@ $(document).ready(function() {
 		// create new array to store countries
 		for (let i = 0; i < checkboxes.length; i++) {
 			if ($(checkboxes[i]).prop("checked")) {
-				newArr.push($(checkboxes[i]).val());
+				// gets data-code attr of checkbox
+				newArr.push(
+					$(checkboxes[i]).data('code').slice(0, -1)
+				);
 			}
 		}
 		//put country data in db 

@@ -4,6 +4,7 @@
         <img src="/assets/img/logo2.png" alt="Logo">
     </div>
 
+
     <ul class="category-list nav-item">
         <li><button class="btn btn-default homeBtn">Home</button></li>
         <li><button class="btn btn-default get-saved-btn">Saved Articles</button></li>
@@ -16,16 +17,37 @@
         <li><a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Select a Country</a></li>
         <li><input type="text" id="search" value="Search the news"></li>
         <li><input id="search-button" type="submit" id="btn btn-default" class="btn btn-default"></li>
+
+   
+    <ul class ="category-list nav-item">
+    <li><button class="btn btn-default homeBtn">Home</button></li>
+    <li><button class="btn btn-default get-saved-btn">Saved Articles</button></li>
+    {{# each categories}}
+    <li><button class="btn btn-default categoryBtn" data-category="{{title}}">{{title}}</button></li>
+    {{/each}}
+    {{#each countries}}
+    <li>{{title}}</li>
+    {{/each}}
+
     </ul>
 
     
     
 
+
     <!-- Dropdown Structure -->
     <div class="country-dropdown nav-item">
         <ul id='dropdown1' class='dropdown-content'>
             <li><a href="#!">United States</a></li>
-            <li><a href="#!">Wherever</a></li>
+
+  <!-- Dropdown Structure -->
+    <ul id='dropdown1' class='dropdown-content'>
+        {{#each countries}}
+        <li><a href="/profile/{{code}}">{{code}}</a></li>
+        {{/each}}
+        <li><a href="#!">Wherever</a></li>     
+    </div>
+
 
     </div>
     
