@@ -1,0 +1,9 @@
+<div class="nav">
+    <button class="homeBtn">Home</button>
+    <button type="button" class="btn btn-default" id="logout">Logout</button>
+    {{#each categories}}
+    <button class="categoryBtn" data-category="{{title}}">{{title}}</button>
+    {{/each}}
+    <input type="text" id="search" placeholder="Search the news"><input type="submit" id="searchBtn" class="searchBtn">
+
+</div>

@@ -27,8 +27,8 @@ app.set("view engine", "handlebars");
 const db = require("./models");
 
 // Sets up the Express app to handle data parsing
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+/* app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); */
 
 // Static directory
 app.use(express.static(__dirname + "/public"));
@@ -39,7 +39,7 @@ app.use(passport.session());
 
 // Routes
 // =============================================================
-//require("./routes/newsapi-routes.js")(app);
+require("./routes/newsapi-routes.js")(app);
 //require("./routes/tickr-routes.js")(app);
 require("./routes/user-routes.js")(app);
 require("./routes/html-routes.js")(app);
