@@ -55,7 +55,6 @@ module.exports = function(app) {
 			// newsapi call to get feed inside of profile
 			newsapi.v2
 				.topHeadlines({
-					category: "Technology",
 					sortBy: "popularity",
 					language: "en",
 					country: "us"
@@ -86,7 +85,6 @@ module.exports = function(app) {
 
 	// Get user favorites
 	app.get('/api/favorites', isAuthenticated, (req, res) => {
-		const articlesArr = [];
 		db.User.findOne({ 
 			where: {
 				id: req.user.id
@@ -96,31 +94,26 @@ module.exports = function(app) {
 			let favorites = result.favorites
 			// split in to array
 			favorites = favorites.split(',');
-			// now loop over array and get the associated article from the articles table:
-			favorites.forEach(item => {
-				db.Article.findOne({
-					where: {
-						articleId: item
+			db.Article.findAll({
+				where: {
+					articleId: favorites
+				}
+			}).then(result => {
+				// send result to profile 
+				const articlesArr = result.map( item=> {
+					return newObj = {
+						title: item.title,
+						author: item.author,
+						source: item.source,
+						description: item.description,
+						url: item.url,
+						urlToImage: item.urlToImage,
+						publishedAt: item.publishedAt
 					}
-				}).then(result => {
-					// send result to profile 
-					console.log('user routes get api favorites get article results');
-					console.log(result);
-					articlesArr.push({
-						title: result.title,
-						author: result.author,
-						source: result.source,
-						description: result.description,
-						url: result.url,
-						urlToImage: result.urlToImage,
-						publishedAt: result.publishedAt
-					});
-				})
-				
-			})
-		}).then(	
-			res.render("index", { profile: true, articles: articlesArr } )
-		);
+				});
+				res.render("index", { profile: true, saved: true, articles: articlesArr } )
+			})	 
+		})
 	});
 
 	// Put category data in user table when signing up

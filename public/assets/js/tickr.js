@@ -2,10 +2,10 @@
 $(function () {
     // show saved articles button
     $('.get-saved-btn').on('click', (e) => {
-        // when user clicks get favorites column, convert it to array and loop through it
         // get the article matching articleId from the articles table
         $.get('/api/favorites', (req, res) => {
             console.log(res);
+            window.location.href = '/api/favorites';
         })
     });
 
