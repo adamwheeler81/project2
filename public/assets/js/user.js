@@ -1,7 +1,7 @@
 $(function() {
 	// get user info on profile load
 	$.get("/api/user_data").then(data => {
-		console.log("Load profile...");
+		console.log("public user js user data...");
 	});
 
 	// logout button

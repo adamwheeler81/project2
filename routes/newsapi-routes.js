@@ -1,44 +1,20 @@
 var db = require("../models");
 const NewsAPI = require("newsapi");
 const newsapi = new NewsAPI("49757bf9eb324e9190afc6ddb15b4eca");
-
-/* 
-    NewsApi routes:
-    get: /api/top-articles - gets top articles all categories / countries / sources (default home page view?)
-    get: /api/category/:category - takes argument from category drop down
-    get: /api/search/:query - takes argument from search input element
-    
-    DB routes:
-    post: /api/db/save/:apiId - checks article table for previous saved articles, 
-                        saves article to table if it's not there, adds fk to user profile
-                        -- appId generated from article UTC_date + author + source
-    get: /api/db/article/:id - gets a saved article from the db
-    get: /api/db/favorites - gets all saved articles from profile
-    get: /api/db/feed - gets all articles from the user's favorite categories
-
-    Auth routes:
-    post: /api/db/createUser - create new user
-    get: /api/db/profile/:id - get user profile info
-*/
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
-	// GET  /api/top-articles
-	//      Gets the day's top headlines sorted by popularity
-	app.get("/api/feed", (req, res) => {
+	app.get("/api/feed", isAuthenticated, (req, res) => {
 		newsapi.v2
 			.topHeadlines({
-				from: "2020-02-01",
-				to: "2020-02-02",
 				sortBy: "popularity",
 				language: "en",
 				country: "us"
 			})
 			.then(result => {
-				let i = 0;
 				const resultObj = getResultObject(result);
 				// return results
-				//res.render("index", { articles: resultObj });
-				res.json({ articles: resultObj });
+				res.render("index", { profile: true, articles: resultObj });
 			})
 			.catch(err => console.log("Whoops! " + err));
 	});
@@ -54,7 +30,7 @@ module.exports = function(app) {
 			.then(result => {
 				const resultObj = getResultObject(result);
 				res.render("index", {
-					category: true,
+					profile: true,
 					categoryTitle: req.params.category,
 					articles: resultObj
 				});
@@ -62,7 +38,7 @@ module.exports = function(app) {
 			.catch(err => console.log("Whoops! " + err));
 	});
 
-	app.get("/api/search/:query", function(req, res) {
+	app.get("/api/search/:query", isAuthenticated, function(req, res) {
 		newsapi.v2
 			.everything({
 				q: req.params.query,
@@ -71,7 +47,7 @@ module.exports = function(app) {
 			})
 			.then(result => {
 				resultObj = getResultObject(result);
-				res.render("index", { articles: resultObj });
+				res.render("index", { profile: true, articles: resultObj });
 			})
 			.catch(err => console.log("Whoops! " + err));
 	});

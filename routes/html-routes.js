@@ -1,5 +1,6 @@
 //const db = require("../models");
 //const passport = require("../config/passport");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 const categories = {
 	col1: [
@@ -84,31 +85,29 @@ module.exports = function(app) {
 		res.render("index", { login: true });
 	});
 
+	app.get("/loginFailed", (req, res) => {
+		res.render("index", { login: true, failed: true });
+	});
+
 	app.get("/signup", (req, res) => {
 		res.render("index", { signup: true, userInfo: true });
 	});
 
-	app.get("/signup/categorySelect", (req, res) => {
-		console.log("get signup categorySelect");
-		console.log(req.body);
+	app.get("/signup/categorySelect", isAuthenticated, (req, res) => {
 		res.render("index", { signup: true, categorySelect: true, categories: categories });
 	});
 
-	app.get("/signup/countrySelect", (req, res) => {
-		console.log("get signup countrySelect");
-		console.log(req.body);
+	app.get("/signup/countrySelect", isAuthenticated, (req, res) => {
 		res.render("index", { signup: true, countrySelect: true, countries: countries });
 	});
 
-	app.post("/signup/categorySelect", (req, res) => {
-		console.log("post signup categorySelect");
-		console.log(req.body);
-		res.redirect("/signup/categorySelect");
+	app.post("/signup/categorySelect", isAuthenticated, (req, res) => {
+		// put categories in user table
+		postCategories(req.body);
+		res.redirect("/signup/countrySelect");
 	});
 
-	app.post("/signup/countrySelect", (req, res) => {
-		console.log("post signup countrySelect");
-		console.log(req.body);
-		res.redirect("/signup/countrySelect");
+	app.post("/signup/countrySelect", isAuthenticated, (req, res) => {
+		res.redirect("/profile");
 	});
 };

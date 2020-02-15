@@ -23,6 +23,9 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
+        favorites: {
+            type: DataTypes.TEXT
+        },
 		categories: {
 			type: DataTypes.STRING,
 			alowNull: true
