@@ -19,7 +19,9 @@
 
   <!-- Dropdown Structure -->
     <ul id='dropdown1' class='dropdown-content'>
-        <li><a href="#!">United States</a></li>
+        {{#each countries}}
+        <li><a href="/profile/{{code}}">{{code}}</a></li>
+        {{/each}}
         <li><a href="#!">Wherever</a></li>     
     </div>
 

@@ -79,7 +79,10 @@ $(document).ready(function() {
 		// create new array to store countries
 		for (let i = 0; i < checkboxes.length; i++) {
 			if ($(checkboxes[i]).prop("checked")) {
-				newArr.push($(checkboxes[i]).val());
+				// gets data-code attr of checkbox
+				newArr.push(
+					$(checkboxes[i]).data('code').slice(0, -1)
+				);
 			}
 		}
 		//put country data in db 
