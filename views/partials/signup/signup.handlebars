@@ -1,0 +1,16 @@
+{{> signup/head }}
+<div class="image">
+  <div class="container">
+    {{#if userInfo}}
+    {{> signup/userInfo }}
+    {{/if}}
+    {{#if categorySelect}}
+    {{> signup/categorySelect }}
+    {{/if}}
+    {{#if countrySelect}}
+    {{> signup/countrySelect}}
+    {{/if}}
+  </div>
+</div>
+{{> footer }}
+{{> signup/footer }}

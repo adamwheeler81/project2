@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     {{> head}}
+    {{# if login}}
+    {{> login/head}}
+    {{/if}}
+    {{# if signup}}
+    {{> signup/head}}
+    {{/if}}
+    {{# if profile}}
+    {{> profile/head}}
+    {{/if}}
 </head>
-
 <body>
     {{{ body }}}
 </body>
-
 </html>

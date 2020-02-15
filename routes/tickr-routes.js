@@ -1,27 +1,11 @@
 var db = require("../models");
 
 module.exports = function (app) {
-    // show saved articles when user clicks Saved Articles...
-    // tie in to profile when authentication is added...
-    app.get('/db/saved', (req, res) => {
-        db.Article.findAll({}).then(result => {
-            const resultObj = getArticleObject(result);
-            res.render(
-                "index", { saved: true, articles: resultObj }
-            )
-        });
-    })
-
     // save an article to the articles table
     // create unique 
     app.post('/db/save', (req, res) => {
-        const saveDate = new Date(req.body.publishedAt).toISOString();
-        console.log(saveDate);
-        console.log(req.body.source);
-        console.log(req.body.author);
         db.Article.create(req.body).then(result => {
             console.log('Article saved.');
-            //res.json(result);
         });
 
     });
