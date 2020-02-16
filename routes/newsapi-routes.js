@@ -51,22 +51,15 @@ const getFeed = function (req, res, searchParams) {
 			countries: result.countries,
 			categories: result.categories
 		};
-		// convert categories in to an array so we can loop through it in handlebars...
+		// convert categories in to an array of strings
 		if (result.categories) {
 			const newArr = result.categories.split(",");
 			var userCategories = newArr.map(item => {
 				return { title: item };
 			})
 		}
-		// same for countries
+		// convert countries to array of JSON objects
 		if (result.countries) {
-			/* const newArr = result.countries.split(",");
-			console.log('newsapi routes countries');
-			console.log(newArr);
-			console.log(JSON.parse(result.countries));
-			var userCountries = newArr.map(item => {
-				return { code: item };
-			}) */
 			var userCountries = JSON.parse(result.countries);
 		}
 		// newsapi call to get feed inside of profile
@@ -152,13 +145,10 @@ module.exports = function(app) {
 					return { title: item };
 				})
 			}
-			// same for countries
-			if (result.countries) {
-				const newArr = result.countries.split(",");
-				var userCountries = newArr.map(item => {
-					return { code: item };
-				})
-			}
+		// convert countries to array of JSON objects
+		if (result.countries) {
+			var userCountries = JSON.parse(result.countries);
+		}
 			// get just the favorites column
 			let favorites = result.favorites
 			// split in to array
@@ -178,7 +168,8 @@ module.exports = function(app) {
 						description: item.description,
 						url: item.url,
 						urlToImage: item.urlToImage,
-						publishedAt: item.publishedAt
+						publishedAt: item.publishedAt,
+						formattedDate: moment(item.publishedAt).format("dddd, MMMM Do YYYY hh:mm A")
 					}
 				});
 				//const resultObj = getResultObject(result);
