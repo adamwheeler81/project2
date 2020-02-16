@@ -3,11 +3,11 @@ module.exports = function (sequelize, DataTypes) {
         title: DataTypes.STRING,
         author: DataTypes.STRING,
         source: DataTypes.STRING,
-        description: DataTypes.STRING,
-        url: DataTypes.STRING,
-        urlToImage: DataTypes.STRING,
+        description: DataTypes.TEXT,
+        url: DataTypes.TEXT,
+        urlToImage: DataTypes.TEXT,
         publishedAt: DataTypes.DATE,
-        articleId: DataTypes.STRING
+        articleId: DataTypes.TEXT
     });
 
     return Article;
