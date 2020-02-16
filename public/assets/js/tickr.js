@@ -3,8 +3,8 @@ $(function () {
     // show saved articles button
     $('.get-saved-btn').on('click', (e) => {
         // get the article matching articleId from the articles table
-        $.get('/api/favorites', (req, res) => {
-            window.location.href = '/api/favorites';
+        $.get('/favorites', (req, res) => {
+            window.location.href = '/favorites';
         })
     });
 
@@ -15,22 +15,21 @@ $(function () {
         const saveAuthor = $(e.target).siblings('.author').html();
         //const saveSource = $(e.target).siblings('.title').data('source');
         const saveSource = $(e.target).siblings('.source').html();
-        const savePulishedAt = $(e.target).siblings('.publishedAt').data('publishedat');
-        const articleId = savePulishedAt + saveAuthor + saveSource;
+        const savePublishedAt = $(e.target).siblings('.publishedAt').data('publishedat');
+        const articleId = savePublishedAt + saveAuthor + saveSource;
         const newObject = {
             author: saveAuthor,
             source: saveSource,
             description: $(e.target).siblings('.description').text(),
-            publishedAt: savePulishedAt,
+            publishedAt: savePublishedAt,
             title: $(e.target).siblings('.title').text(),
             url: $(e.target).siblings('.url').attr('href'),
             urlToImage: $(e.target).siblings('.urlToImage').data('src'),
             articleId: articleId.replace(/[-,:\.\s]/g, '')
         };
-        console.log('pub js tickr');
-        console.log(savePulishedAt);
+        // update user table with new favorite
         updateUserFavorites(newObject.articleId);
-        // post route on article-routes
+        // update article table with new article
         $.post("/db/save", newObject, () => {
             window.location.href = '/';
         });

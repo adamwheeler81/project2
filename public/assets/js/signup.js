@@ -28,7 +28,6 @@ $(document).ready(function() {
 			firstName: firstName,
 			lastName: lastName
 		}).then(data => {
-			//window.location.replace("/profile");
 			window.location.replace("/signup/categorySelect");
 		});
 	};
@@ -131,14 +130,15 @@ $(document).ready(function() {
 		 });
 	});
 	
-	/* 
+	 
 	$("#previous-1").click(function() {
-		$(".form-1").show();
-		$(".form-2").hide();
+		renderNext("/signup", "");
 	});
+
+	
 	$("#previous-2").click(function() {
-		$(".form-2").show();
-		$(".form-3").hide();
-	}); */
+		console.log('go back');
+		window.location.href = "/signup/categorySelect";
+	});
 
 });
