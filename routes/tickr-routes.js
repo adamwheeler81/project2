@@ -2,7 +2,6 @@ var db = require("../models");
 
 module.exports = function (app) {
     // save an article to the articles table
-    // create unique 
     app.post('/db/save', (req, res) => {
         db.Article.create(req.body).then(result => {
             console.log('Article saved.');
@@ -12,7 +11,7 @@ module.exports = function (app) {
 
     // Helper functions for building response object from query result
     // parse article objects before sending them to handlebars
-    getArticleObject = function (result) {
+    /* getArticleObject = function (result) {
         let i = 0;
         return result.map(item => {
             const newObj = {
@@ -27,6 +26,6 @@ module.exports = function (app) {
             }
             return newObj;
         });
-    };
+    }; */
 
 }

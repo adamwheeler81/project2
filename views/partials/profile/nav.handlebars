@@ -8,57 +8,25 @@
     <ul class="category-list nav-item">
         <li><button class="btn btn-default homeBtn">Home</button></li>
         <li><button class="btn btn-default get-saved-btn">Saved Articles</button></li>
-        <li><button class="btn btn-default categoryBtn" data-category="Technology">Technology</button></li>
-        <li><button class="btn btn-default categoryBtn" data-category="Sports">Sports</button></li>
-        <li><button class="btn btn-default categoryBtn" data-category="Business">Business</button></li>
-        <li><button class="btn btn-default categoryBtn" data-category="Entertainment">Entertainment</button></li>
-        <li><button class="btn btn-default categoryBtn" data-category="Health">Health</button></li>
-        <li><button class="btn btn-default categoryBtn" data-category="Science">Science</button></li>
+        {{# each categories}}
+        <li><button class="btn btn-default categoryBtn" data-category="{{title}}">{{title}}</button></li>
+        {{/each}}
+        {{#each countries}}
+        <li>{{title}}</li>
+        {{/each}}
         <li><a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Select a Country</a></li>
+         <!-- Dropdown Structure -->
+        <div class="country-dropdown nav-item">
+            <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="#!">United States</a></li>
+                {{#each countries}}
+                <li><a href="/profile/{{code}}">{{name}}</a></li>
+                {{/each}}
+                <li><a href="#!">Wherever</a></li>   
+            </ul>  
+        </div>
         <li><input type="text" id="search" value="Search the news"></li>
         <li><input id="search-button" type="submit" id="btn btn-default" class="btn btn-default"></li>
-
-   
-
-    {{# each categories}}
-    <li><button class="btn btn-default categoryBtn" data-category="{{title}}">{{title}}</button></li>
-    {{/each}}
-    {{#each countries}}
-    <li>{{title}}</li>
-    {{/each}}
-
     </ul>
-
-    
-    
-
-
-    <!-- Dropdown Structure -->
-    <div class="country-dropdown nav-item">
-        <ul id='dropdown1' class='dropdown-content'>
-            <li><a href="#!">United States</a></li>
-
-  <!-- Dropdown Structure -->
-    <ul id='dropdown1' class='dropdown-content'>
-        {{#each countries}}
-        <li><a href="/profile/{{code}}">{{code}}</a></li>
-        {{/each}}
-        <li><a href="#!">Wherever</a></li>     
-    </div>
-
-
-    </div>
-    
-   
-    
 </div>
 </div>
-
-<!-- <div class="nav">
-    <button class="homeBtn">Home</button>
-    <button type="button" class="btn btn-default" id="logout">Logout</button>
-    {{#each categories}}
-    <button class="categoryBtn" data-category="{{title}}">{{title}}</button>
-    {{/each}}
-    <input type="text" id="search" placeholder="Search the news"><input type="submit" id="searchBtn" class="searchBtn">
-</div> -->
