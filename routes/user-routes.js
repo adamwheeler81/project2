@@ -1,32 +1,8 @@
 const db = require("../models");
-const NewsAPI = require("newsapi");
 const passport = require("passport");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
-const newsapi = new NewsAPI("49757bf9eb324e9190afc6ddb15b4eca");
 
-module.exports = function(app) {
-// Helper functions for building response object from query result
-	// parse results of newsapi queries
-	getResultObject = function(result) {
-		let i = 0;
-		return result.articles.map(item => {
-			const newObj = {
-				apiId: i,
-				title: item.title,
-				author: item.author,
-				source: item.source.name,
-				description: item.description,
-				url: item.url,
-				urlToImage: item.urlToImage,
-				publishedAt: item.publishedAt
-			};
-			i++;
-			return newObj;
-		});
-	};
-
-	// USER / DATABASE ROUTES
-	
+module.exports = function(app) {	
 
 	// gets user data for use elsewhere..
 	app.get("/api/user_data", isAuthenticated, (req, res) => {
@@ -42,69 +18,6 @@ module.exports = function(app) {
 				id: req.user.id
 			});
 		}
-	});
-
-	// Get user favorites
-	app.get('/api/favorites', isAuthenticated, (req, res) => {
-		///
-		db.User.findOne({ 
-			where: {
-				id: req.user.id
-			}
-		}).then(result => {
-			// convert categories in to an array so we can loop through it...
-			if (result.categories) {
-				const newArr = result.categories.split(",");
-				var userCategories = newArr.map(item => {
-					return { title: item };
-				})
-			}
-			// same for countries
-			if (result.countries) {
-				const newArr = result.countries.split(",");
-				var userCountries = newArr.map(item => {
-					return { code: item };
-				})
-			}
-			// get just the favorites column
-			let favorites = result.favorites
-			// split in to array
-			favorites = favorites.split(',');
-			// get rest of user info
-			const userInfo = {
-				firstName: result.firstName,
-				lastName: result.lastName,
-				email: result.email,
-				countries: result.countries,
-				categories: result.categories
-			};
-			db.Article.findAll({
-				where: {
-					articleId: favorites
-				}
-			}).then(result => {
-				// send result to profile 
-				const articlesArr = result.map( item=> {
-					return newObj = {
-						title: item.title,
-						author: item.author,
-						source: item.source,
-						description: item.description,
-						url: item.url,
-						urlToImage: item.urlToImage,
-						publishedAt: item.publishedAt
-					}
-				});
-				res.render("index", { 
-					profile: true, 
-					saved: true, 
-					articles: articlesArr, 
-					user: userInfo, 
-					categories: userCategories, 
-					countries: userCountries 
-				} )
-			})	 
-		})
 	});
 
 	// Put category data in user table when signing up

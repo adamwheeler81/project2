@@ -5,6 +5,44 @@ $(document).ready(function() {
 	const passwordInput = $("#password-input");
 	const passwordConfirmInput = $("#password-confirm");
 
+	renderNext = function(url, page, data) {
+		if (typeof data == "undefined") {
+			$.get(url, result => {
+				window.location.href = url;
+				return;
+			});
+		} else {
+			url = url + "/" + page;
+			$.post(url, data, result => {
+				window.location.href = url;
+			});
+		}
+	};
+
+	// Does a post to the signup route. If successful, we are redirected to the members page
+	// Otherwise we log any errors
+	signUpUser = function(email, password, firstName, lastName) {
+		$.post("/api/signup", {
+			email: email,
+			password: password,
+			firstName: firstName,
+			lastName: lastName
+		}).then(data => {
+			//window.location.replace("/profile");
+			window.location.replace("/signup/categorySelect");
+		});
+	};
+
+	loginUser = function(email, password) {
+		$.post("/api/login", {
+			email: email,
+			password: password
+		}).then(data => {
+			window.location.href = "/profile";
+		});
+	};
+
+	// EVENT HANDLERS
 	// login button on home screen to login with existing account
 	$("#loginBtn").on("click", e => {
 		const userData = {
@@ -80,17 +118,20 @@ $(document).ready(function() {
 		for (let i = 0; i < checkboxes.length; i++) {
 			if ($(checkboxes[i]).prop("checked")) {
 				// gets data-code attr of checkbox
-				newArr.push(
-					$(checkboxes[i]).data('code').slice(0, -1)
-				);
+				const newObj = { name: $(checkboxes[i]).val(), code: $(checkboxes[i]).data('code').slice(0, -1) };
+				newArr.push(newObj);
 			}
 		}
+		console.log('pub js signup countries');
+		//console.log(newArr);
+		//console.log(JSON.stringify(newArr));
+		//console.log(JSON.parse(newArr));
 		//put country data in db 
 		// convert array to string
 		$.ajax({
 			url: '/api/user/countries',
 			type: 'PUT',
-			data: {countries: newArr.toString()}
+			data: {countries: JSON.stringify(newArr)}
 		 }).then(result => {
 			window.location.href = "/profile";
 		 });
@@ -106,40 +147,4 @@ $(document).ready(function() {
 		$(".form-3").hide();
 	}); */
 
-	renderNext = function(url, page, data) {
-		if (typeof data == "undefined") {
-			$.get(url, result => {
-				window.location.href = url;
-				return;
-			});
-		} else {
-			url = url + "/" + page;
-			$.post(url, data, result => {
-				window.location.href = url;
-			});
-		}
-	};
-
-	// Does a post to the signup route. If successful, we are redirected to the members page
-	// Otherwise we log any errors
-	signUpUser = function(email, password, firstName, lastName) {
-		$.post("/api/signup", {
-			email: email,
-			password: password,
-			firstName: firstName,
-			lastName: lastName
-		}).then(data => {
-			//window.location.replace("/profile");
-			window.location.replace("/signup/categorySelect");
-		});
-	};
-
-	loginUser = function(email, password) {
-		$.post("/api/login", {
-			email: email,
-			password: password
-		}).then(data => {
-			window.location.href = "/profile";
-		});
-	};
 });
