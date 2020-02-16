@@ -12,7 +12,13 @@ $(function() {
 		// get current country
 		let url = window.location.pathname;
 		url = url.split('/');
-		url = "/" + url[1] + "/" + url[2];
+		if (url[1] === "profile") {
+			url = "/profile/" + url[2];
+		} else {
+			// default to us 
+			url = "/profile/us";
+		}
+		
 		return url
 	}
 
@@ -24,6 +30,7 @@ $(function() {
 	// show category when a user clicks that category's button
 	$(".categoryBtn").on("click", e => {
 		const targetEl = $(e.target).data("category");
+		// get current country
 		let url = getUrlPath()
 		url = url + "/" + targetEl	
 		renderGet(url);
