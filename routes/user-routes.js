@@ -1,8 +1,7 @@
 const db = require("../models");
+const NewsAPI = require("newsapi");
 const passport = require("passport");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
-// testing profile route:
-const NewsAPI = require("newsapi");
 const newsapi = new NewsAPI("49757bf9eb324e9190afc6ddb15b4eca");
 
 module.exports = function(app) {
@@ -27,111 +26,10 @@ module.exports = function(app) {
 	};
 
 	// USER / DATABASE ROUTES
-	// get the user profile.
-	// triggered when user logs in through landing page or completes the signup process
-	app.get("/profile", isAuthenticated, (req, res) => {
-		const searchParams = {
-			sortBy: "popularity",
-			language: "en"
-		};
-		// get favorites, categories, countries, etc. from user table then use them to build the custom feed...
-		db.User.findOne({
-			where: {
-				id: req.user.id
-			}
-		}).then(result => {
-			const userInfo = {
-				firstName: result.firstName,
-				lastName: result.lastName,
-				email: result.email,
-				countries: result.countries,
-				categories: result.categories
-			};
-			// convert categories in to an array so we can loop through it...
-			if (result.categories) {
-				const newArr = result.categories.split(",");
-				var userCategories = newArr.map(item => {
-					return { title: item };
-				})
-			}
-			// same for countries
-			if (result.countries) {
-				const newArr = result.countries.split(",");
-				var userCountries = newArr.map(item => {
-					return { code: item };
-				})
-				// use first country as default for profile feed
-				searchParams.country = newArr[0];
-			}
-			// newsapi call to get feed inside of profile
-			newsapi.v2
-				.topHeadlines(searchParams)
-				.then(result => {
-					const resultObj = getResultObject(result);
-					// return results
-					res.render("index", { 
-						profile: true, 
-						user: userInfo, 
-						categories: userCategories, 
-						countries: userCountries, 
-						articles: resultObj 
-					});
-				});
-		});
-	});
-
-	app.get("/profile/:country", isAuthenticated, (req, res) => {
-		const searchParams = {
-			sortBy: "popularity",
-			language: "en",
-			country: req.params.country
-		};
-		// get favorites, categories, countries, etc. from user table then use them to build the custom feed...
-		db.User.findOne({
-			where: {
-				id: req.user.id
-			}
-		}).then(result => {
-			const userInfo = {
-				firstName: result.firstName,
-				lastName: result.lastName,
-				email: result.email,
-				countries: result.countries,
-				categories: result.categories
-			};
-			// convert categories in to an array so we can loop through it...
-			if (result.categories) {
-				const newArr = result.categories.split(",");
-				var userCategories = newArr.map(item => {
-					return { title: item };
-				})
-			}
-			// same for countries
-			if (result.countries) {
-				const newArr = result.countries.split(",");
-				var userCountries = newArr.map(item => {
-					return { code: item };
-				})
-			}
-			// newsapi call to get feed inside of profile
-			newsapi.v2
-				.topHeadlines(searchParams)
-				.then(result => {
-					const resultObj = getResultObject(result);
-					// return results
-					res.render("index", { 
-						profile: true, 
-						user: userInfo, 
-						categories: userCategories, 
-						countries: userCountries, 
-						articles: resultObj 
-					});
-				});
-		});
-	});
+	
 
 	// gets user data for use elsewhere..
-	app.get("/api/user_data", (req, res) => {
+	app.get("/api/user_data", isAuthenticated, (req, res) => {
 		if (!req.user) {
 			// The user is not logged in, send back an empty object
 			res.json({});
@@ -148,15 +46,38 @@ module.exports = function(app) {
 
 	// Get user favorites
 	app.get('/api/favorites', isAuthenticated, (req, res) => {
+		///
 		db.User.findOne({ 
 			where: {
 				id: req.user.id
 			}
 		}).then(result => {
+			// convert categories in to an array so we can loop through it...
+			if (result.categories) {
+				const newArr = result.categories.split(",");
+				var userCategories = newArr.map(item => {
+					return { title: item };
+				})
+			}
+			// same for countries
+			if (result.countries) {
+				const newArr = result.countries.split(",");
+				var userCountries = newArr.map(item => {
+					return { code: item };
+				})
+			}
 			// get just the favorites column
 			let favorites = result.favorites
 			// split in to array
 			favorites = favorites.split(',');
+			// get rest of user info
+			const userInfo = {
+				firstName: result.firstName,
+				lastName: result.lastName,
+				email: result.email,
+				countries: result.countries,
+				categories: result.categories
+			};
 			db.Article.findAll({
 				where: {
 					articleId: favorites
@@ -174,7 +95,14 @@ module.exports = function(app) {
 						publishedAt: item.publishedAt
 					}
 				});
-				res.render("index", { profile: true, saved: true, articles: articlesArr } )
+				res.render("index", { 
+					profile: true, 
+					saved: true, 
+					articles: articlesArr, 
+					user: userInfo, 
+					categories: userCategories, 
+					countries: userCountries 
+				} )
 			})	 
 		})
 	});
