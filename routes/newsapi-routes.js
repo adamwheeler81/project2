@@ -4,6 +4,11 @@ const NewsAPI = require("newsapi");
 const newsapi = new NewsAPI("49757bf9eb324e9190afc6ddb15b4eca");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
+let searchParams = {
+	sortBy: "popularity",
+	language: "en"
+};
+
 function getUrlVars() {
     const vars = {};
     const parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -80,48 +85,20 @@ const getFeed = function (req, res, searchParams) {
 }
 
 module.exports = function(app) {
-	// get the user profile.
-	// triggered when user logs in through landing page or completes the signup process
-	app.get("/profile", isAuthenticated, (req, res) => {
-		const searchParams = {
-			sortBy: "popularity",
-			language: "en"
-		};
-		getFeed(req, res, searchParams);
-	});
 
 	app.get("/profile/:country", isAuthenticated, (req, res) => {
-		const searchParams = {
-			sortBy: "popularity",
-			language: "en",
-			country: req.params.country
-		};
-		getFeed(req, res, searchParams);
-	});
-
-	app.get("/api/category/:category", isAuthenticated, (req, res) => {
-		const searchParams = {
-			sortBy: "popularity",
-			language: "en",
-			category: req.params.category
-		};
+		if ( req.params.country != "all" ){
+			searchParams.country = req.params.country
+		}
+		
 		getFeed(req, res, searchParams);
 	});
 
 	// custom query using search button
-	app.get("/api/search/:query", isAuthenticated, function(req, res) {
-		const apiSource = 'everything';
-		newsapi.v2
-			.everything({
-				q: req.params.query,
-				sortBy: "popularity",
-				language: "en"
-			})
-			.then(result => {
-				resultObj = getResultObject(result);
-				res.render("index", { profile: true, articles: resultObj });
-			})
-			.catch(err => console.log("Whoops! " + err));
+	app.get("/profile/:country/search/:query", isAuthenticated, function(req, res) {
+		searchParams.q = req.params.query;
+		searchParams.country = req.params.country;
+		getFeed(req, res, searchParams);
 	});
 
 	// Get user favorites
@@ -189,7 +166,7 @@ module.exports = function(app) {
 	// test url param parsing
 	/*****************************************************************/
 	app.get("/profile/:country/:category", isAuthenticated, function(req, res) {
-		console.log('newsapi routes test url params');
+		// default values redirect to 'us' homepage 
 		let country = 'us';
 		let category = '';
 		if (req.params.country) {
@@ -198,14 +175,8 @@ module.exports = function(app) {
 		if (req.params.category) {
 			category = req.params.category;
 		}
-		console.log(req.params.country);
-		console.log(req.params.category);
-		const searchParams = {
-			sortBy: "popularity",
-			language: "en",
-			country: country,
-			category: category
-		};
+		searchParams.country = country;
+		searchParams.category = category;
 		getFeed(req, res, searchParams);
 	});
 
