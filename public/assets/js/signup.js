@@ -118,25 +118,20 @@ $(document).ready(function() {
 		for (let i = 0; i < checkboxes.length; i++) {
 			if ($(checkboxes[i]).prop("checked")) {
 				// gets data-code attr of checkbox
-				newArr.push(
-					{
-						name: $(checkboxes[i]).val(), 
-						code: $(checkboxes[i]).data('code').slice(0, -1)
-					}
-				);
+				const newObj = { name: $(checkboxes[i]).val(), code: $(checkboxes[i]).data('code').slice(0, -1) };
+				newArr.push(newObj);
 			}
 		}
 		console.log('pub js signup countries');
-		console.log(newArr);
-		const test = newArr.toString();
-		console.log(test);
-		console.log(test.split('},{'));
+		//console.log(newArr);
+		//console.log(JSON.stringify(newArr));
+		//console.log(JSON.parse(newArr));
 		//put country data in db 
 		// convert array to string
 		$.ajax({
 			url: '/api/user/countries',
 			type: 'PUT',
-			data: {countries: newArr.toString()}
+			data: {countries: JSON.stringify(newArr)}
 		 }).then(result => {
 			window.location.href = "/profile";
 		 });

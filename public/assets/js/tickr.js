@@ -15,7 +15,7 @@ $(function () {
         const saveAuthor = $(e.target).siblings('.author').html();
         //const saveSource = $(e.target).siblings('.title').data('source');
         const saveSource = $(e.target).siblings('.source').html();
-        const savePulishedAt = $(e.target).siblings('.publishedAt').text();
+        const savePulishedAt = $(e.target).siblings('.publishedAt').data('publishedat');
         const articleId = savePulishedAt + saveAuthor + saveSource;
         const newObject = {
             author: saveAuthor,
@@ -27,6 +27,8 @@ $(function () {
             urlToImage: $(e.target).siblings('.urlToImage').data('src'),
             articleId: articleId.replace(/[-,:\.\s]/g, '')
         };
+        console.log('pub js tickr');
+        console.log(savePulishedAt);
         updateUserFavorites(newObject.articleId);
         // post route on article-routes
         $.post("/db/save", newObject, () => {

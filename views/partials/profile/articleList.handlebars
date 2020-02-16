@@ -7,7 +7,7 @@
                 <div class="clearfix">
                     <div class="article">
                         <h3 class="title">{{ title }}</h3>
-                        <h5 class="publishedAt">{{ publishedAt }}</h5>
+                        <h5 class="publishedAt" data-publishedAt={{ publishedAt }}>{{ formattedDate }}</h5>
                         <h4 class="author">{{author}}</h4>
                         <p class="description">{{description}}</p>
                         {{# unless saved }}

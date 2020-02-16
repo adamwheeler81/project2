@@ -20,7 +20,6 @@ function getUrlParam(parameter, defaultvalue){
     return urlparameter;
 }
 
-
 	// parse results of newsapi queries
 const getResultObject = function(result) {
 	return result.articles.map(item => {
@@ -31,7 +30,8 @@ const getResultObject = function(result) {
 			description: item.description,
 			url: item.url,
 			urlToImage: item.urlToImage,
-			publishedAt: moment(item.publishedAt).format("dddd, MMMM Do YYYY hh:mm A")
+			publishedAt: item.publishedAt,
+			formattedDate: moment(item.publishedAt).format("dddd, MMMM Do YYYY hh:mm A")
 		};
 		return newObj;
 	});
@@ -60,10 +60,14 @@ const getFeed = function (req, res, searchParams) {
 		}
 		// same for countries
 		if (result.countries) {
-			const newArr = result.countries.split(",");
+			/* const newArr = result.countries.split(",");
+			console.log('newsapi routes countries');
+			console.log(newArr);
+			console.log(JSON.parse(result.countries));
 			var userCountries = newArr.map(item => {
 				return { code: item };
-			})
+			}) */
+			var userCountries = JSON.parse(result.countries);
 		}
 		// newsapi call to get feed inside of profile
 		newsapi.v2
@@ -125,6 +129,69 @@ module.exports = function(app) {
 				res.render("index", { profile: true, articles: resultObj });
 			})
 			.catch(err => console.log("Whoops! " + err));
+	});
+
+	// Get user favorites
+	app.get('/api/favorites', isAuthenticated, (req, res) => {
+		db.User.findOne({ 
+			where: {
+				id: req.user.id
+			}
+		}).then(result => {
+			const userInfo = {
+				firstName: result.firstName,
+				lastName: result.lastName,
+				email: result.email,
+				countries: result.countries,
+				categories: result.categories
+			};
+			// convert categories in to an array so we can loop through it...
+			if (result.categories) {
+				const newArr = result.categories.split(",");
+				var userCategories = newArr.map(item => {
+					return { title: item };
+				})
+			}
+			// same for countries
+			if (result.countries) {
+				const newArr = result.countries.split(",");
+				var userCountries = newArr.map(item => {
+					return { code: item };
+				})
+			}
+			// get just the favorites column
+			let favorites = result.favorites
+			// split in to array
+			favorites = favorites.split(',');
+			// get rest of user info
+			db.Article.findAll({
+				where: {
+					articleId: favorites
+				}
+			}).then(result => {
+				// send result to profile 
+				const articlesArr = result.map( item=> {
+					return newObj = {
+						title: item.title,
+						author: item.author,
+						source: item.source,
+						description: item.description,
+						url: item.url,
+						urlToImage: item.urlToImage,
+						publishedAt: item.publishedAt
+					}
+				});
+				//const resultObj = getResultObject(result);
+				res.render("index", { 
+					profile: true, 
+					saved: true, 
+					articles: articlesArr, 
+					user: userInfo, 
+					categories: userCategories, 
+					countries: userCountries 
+				} )
+			})	 
+		})
 	});
 
 	/*****************************************************************/
