@@ -38,7 +38,7 @@ $(document).ready(function() {
 			email: email,
 			password: password
 		}).then(data => {
-			window.location.href = "/profile";
+			window.location.href = "/profile/us";
 		});
 	};
 
@@ -122,18 +122,12 @@ $(document).ready(function() {
 				newArr.push(newObj);
 			}
 		}
-		console.log('pub js signup countries');
-		//console.log(newArr);
-		//console.log(JSON.stringify(newArr));
-		//console.log(JSON.parse(newArr));
-		//put country data in db 
-		// convert array to string
 		$.ajax({
 			url: '/api/user/countries',
 			type: 'PUT',
 			data: {countries: JSON.stringify(newArr)}
 		 }).then(result => {
-			window.location.href = "/profile";
+			window.location.href = "/profile/us";
 		 });
 	});
 	
