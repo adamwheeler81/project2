@@ -10,7 +10,7 @@
     "test": {
         "username": "jmb3414d73oi66lv",
         "password": "xjm8292imdz5nb55",
-        "database": "tickr",
+        "database": "database_test",
         "host": "s54ham9zz83czkff.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
         "port": 3306,
         "dialect": "mysql"
