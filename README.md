@@ -18,8 +18,11 @@ Running the app:
 App can be utlized by running "node server.js".
 A MYSQL database called 'Tickr" needs to be created along with a config.json containing the user's database info.
 
-CSS used:
+CSS platform used:
 Materialize CSS
+
+Deployed Heroku App:
+https://git.heroku.com/floating-brook-80594.git
 
 
 Slideshow presentation link: https://docs.google.com/presentation/d/1n3---Wv6lzACx1w-lfM9C0NcFJBhUluBjw_pKIR6un0/edit?usp=sharing
