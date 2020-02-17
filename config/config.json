@@ -1,7 +1,7 @@
 {
     "development": {
-        "username": "dbUser",
-        "password": "How do you like my password?",
+        "username": "root",
+        "password": "password123!",
         "database": "tickr",
         "host": "127.0.0.1",
         "port": 3306,
