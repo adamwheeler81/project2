@@ -18,7 +18,7 @@ Running the app:
 App can be utlized by running "node server.js".
 A MYSQL database called 'Tickr" needs to be created along with a config.json containing the user's database info.
 
-CSS used:
+CSS platform used:
 Materialize CSS
 
 Deployed Heroku App:
