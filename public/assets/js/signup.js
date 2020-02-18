@@ -5,6 +5,12 @@ $(document).ready(function() {
 	const passwordInput = $("#password-input");
 	const passwordConfirmInput = $("#password-confirm");
 
+	signUpError = function(message) {
+		$('#error-message').empty();
+		$('#error-message').html(message);
+		$('#alert').show();
+	}
+
 	renderNext = function(url, page, data) {
 		if (typeof data == "undefined") {
 			$.get(url, result => {
@@ -27,8 +33,14 @@ $(document).ready(function() {
 			password: password,
 			firstName: firstName,
 			lastName: lastName
-		}).then(data => {
+		}).then(() => {
 			window.location.replace("/signup/categorySelect");
+		}).catch(err => {
+			if (err.responseJSON.original.code === "ER_DUP_ENTRY") {
+				signUpError("Email address already exists.");
+			} else {
+				signUpError("Unable to create the user. Please try again.");
+			}
 		});
 	};
 
@@ -76,6 +88,10 @@ $(document).ready(function() {
 		};
 
 		if (!userData.email || !userData.password) {
+			signUpError("You must enter an email and a password.");
+			return;
+		} else if ( userData.password !== userData.passwordConfim ) {
+			signUpError("Passwords don't match!");
 			return;
 		}
 		// If we have an email and password, run the signUpUser function
