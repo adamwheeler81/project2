@@ -22,7 +22,7 @@ CSS platform used:
 Materialize CSS
 
 Deployed Heroku App:
-https://git.heroku.com/floating-brook-80594.git
+https://unit15project2.herokuapp.com
 
 
 Slideshow presentation link: https://docs.google.com/presentation/d/1n3---Wv6lzACx1w-lfM9C0NcFJBhUluBjw_pKIR6un0/edit?usp=sharing

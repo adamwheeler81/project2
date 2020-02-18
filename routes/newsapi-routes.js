@@ -1,7 +1,7 @@
 const db = require("../models");
 const moment = require("moment");
 const NewsAPI = require("newsapi");
-const newsapi = new NewsAPI("49757bf9eb324e9190afc6ddb15b4eca");
+const newsapi = new NewsAPI("aa366fc4d5714b86974438befb7fc974");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // parse results of newsapi queries
