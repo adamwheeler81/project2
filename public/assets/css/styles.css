@@ -99,12 +99,17 @@ li {
     margin: 10px;
 }
 
-.urlToImage {
-    height: 200px;
+.card {
+    margin: 0 auto;
+}
+
+.action-buttons {
+    margin-top: 5%;
+}
+
+.urlToImage {   
     margin: 10px;
-    padding: 10px;
-    float: left;
-    clear: both;
+    padding: 10px;   
 }
 
 .articleList {
@@ -169,3 +174,13 @@ input[type=submit] {
  .dropdown-content {
      width: 100px;
  }
+
+#logo {
+    margin-top: 7px;
+}
+
+@media only screen and (max-width: 600px) {
+    .urlToImage {
+      visibility: hidden;
+    }
+  }

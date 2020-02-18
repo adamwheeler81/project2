@@ -1,11 +1,9 @@
-<div class="nav-wrapper">
-
-    <div class="logo nav-item">
-        <img src="/assets/img/logo2.png" alt="Logo">
-    </div>
-
-
-    <ul class="category-list nav-item">
+  <nav>
+    <div class="nav-wrapper" style="height: 75px;">
+      <img src="/assets/img/logo2.png" alt="Logo" id="logo">
+      
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
         <li><button class="btn btn-default homeBtn">Home</button></li>
         <li><button class="btn btn-default get-saved-btn">Saved Articles</button></li>
         {{# each categories}}
@@ -28,5 +26,29 @@
         <li><input type="text" id="search" value="Search the news"></li>
         <li><input id="search-button" type="submit" id="btn btn-default" class="btn btn-default"></li>
     </ul>
-</div>
-</div>
+      
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><button class="btn btn-default homeBtn">Home</button></li>
+        <li><button class="btn btn-default get-saved-btn">Saved Articles</button></li>
+        {{# each categories}}
+        <li><button class="btn btn-default categoryBtn" data-category="{{title}}">{{title}}</button></li>
+        {{/each}}
+        {{#each countries}}
+        <li>{{title}}</li>
+        {{/each}}
+        
+        <div class="country-dropdown nav-item">
+            <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="/profile/us">United States</a></li>
+                {{#each countries}}
+                <li><a href="/profile/{{code}}">{{name}}</a></li>
+                {{/each}}
+                <li><a href="/profile/all">Wherever</a></li>   
+            </ul>  
+        </div>
+        <li><input type="text" id="search" value="Search the news"></li>
+        <li><input id="search-button" type="submit" id="btn btn-default" class="btn btn-default"></li>
+  </ul>
