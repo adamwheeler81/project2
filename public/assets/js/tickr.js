@@ -12,19 +12,18 @@ $(function () {
      $('.save-btn').on("click", (e) => {
         $(e.target).text('Saved!');
         // save article info to Article table, get articleId and update User favorites
-        const saveAuthor = $(e.target).siblings('.author').html();
-        //const saveSource = $(e.target).siblings('.title').data('source');
-        const saveSource = $(e.target).siblings('.source').html();
-        const savePublishedAt = $(e.target).siblings('.publishedAt').data('publishedat');
+        const saveAuthor = $(e.target).parent().siblings('.author').html();
+        const savePublishedAt = $(e.target).parent().siblings('.publishedAt').data('publishedat');
+        const saveSource = $(e.target).parent().siblings('.author').data('source');
         const articleId = savePublishedAt + saveAuthor + saveSource;
         const newObject = {
             author: saveAuthor,
             source: saveSource,
-            description: $(e.target).siblings('.description').text(),
+            description: $(e.target).parent().siblings('.description').text(),
             publishedAt: savePublishedAt,
-            title: $(e.target).siblings('.title').text(),
+            title: $(e.target).parent().siblings('.header').text(),
             url: $(e.target).siblings('.url').attr('href'),
-            urlToImage: $(e.target).siblings('.urlToImage').data('src'),
+            urlToImage: $(e.target).parent().parent().parent().siblings('.card-image').data('src'),
             articleId: articleId.replace(/[-,:\.\s]/g, '')
         };
         // update user table with new favorite

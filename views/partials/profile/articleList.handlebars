@@ -3,26 +3,25 @@
         {{#each articles}}
         <li class="articleList">
             <div class="col s12 m7">
-                
                 <div class="card horizontal">
-                <div class="card-image">
-                    <img class="urlToImage" src={{ urlToImage }} data-src={{ urlToImage }}>
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                    <h4 class="header">{{ title }}</h4>
-                    <h5 class="publishedAt" data-publishedAt={{ publishedAt }}>{{ formattedDate }}</h5>
-                    <h4 class="author">{{author}}</h4>
-                    <p class="description">{{description}}</p>
-                    {{# unless saved }}
-                        <div class="action-buttons">
-                        <button class="btn btn-default save-btn">Save Article</button>
-                        {{/unless}}
-                        <a class="url" target="_blank" href={{ url}}><button class="url btn btn-default" target="_blank">Read This Story</button></a>
-                        </div>
+                    <div class="card-image" data-src={{ urlToImage }}>
+                        <img class="urlToImage" src={{ urlToImage }} >
                     </div>
-                    
-                </div>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <h4 class="header">{{ title }}</h4>
+                            <h5 class="publishedAt" data-publishedAt={{ publishedAt }}>{{ formattedDate }}</h5>
+                            <h4 class="author" data-source={{source}}>{{author}}</h4>
+                            <p class="description">{{description}}</p>
+                            {{# unless saved }}
+                            <div class="action-buttons">
+                                <button class="btn btn-default save-btn">Save Article</button>
+                             {{/unless}}
+                                <a class="url" target="_blank" href={{ url}}><button class="url btn btn-default" target="_blank">Read This Story</button></a>
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>   
                  <div class="divider"></div>            
             </div>

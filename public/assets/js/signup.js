@@ -44,6 +44,7 @@ $(document).ready(function() {
 	// EVENT HANDLERS
 	// login button on home screen to login with existing account
 	$("#loginBtn").on("click", e => {
+		e.preventDefault();
 		const userData = {
 			email: emailInput.val().trim(),
 			password: passwordInput.val().trim()
@@ -64,8 +65,8 @@ $(document).ready(function() {
 	});
 
 	// Sign Up button on homepage
-	$("#submit-1").click(event => {
-		event.preventDefault();
+	$("#submit-1").click(e => {
+		e.preventDefault();
 		var userData = {
 			email: emailInput.val().trim(),
 			firstName: firstNameInput.val().trim(),
@@ -88,7 +89,8 @@ $(document).ready(function() {
 
 	// Next button on category select screen
 	// put selected categories in user table and navigate to country select screen
-	$("#submit-2").click(function() {
+	$("#submit-2").click(e => {
+		e.preventDefault();
 		let newArr = [];
 		const checkboxes = $("input[type='checkbox']");
 		// create new array to store categories
@@ -110,7 +112,8 @@ $(document).ready(function() {
 
 	// Next button on country select screen
 	// put country in user table and show profile with custom feed
-	$("#submit-3").click(function() {
+	$("#submit-3").click(e => {
+		e.preventDefault();
 		let newArr = [];
 		const checkboxes = $("input[type='checkbox']");
 		// create new array to store countries
