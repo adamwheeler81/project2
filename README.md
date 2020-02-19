@@ -5,6 +5,8 @@ The user will be prompted with a web authentication and will be able to save art
 to their accounts.
 Separate API keys are used to grab articles from varying sources such as author, topic, news outlet, etc.
 
+API source: https://newsapi.org/
+
 Requirements/node dependencies:
 User will need to run 'npm install' to install required dependencies to include:
 "express": "^4.16.3",
