@@ -23,8 +23,6 @@ A MYSQL database called 'Tickr" needs to be created along with a config.json con
 CSS platform used:
 Materialize CSS
 
-Deployed Heroku App:
-https://unit15project2.herokuapp.com
-
+## Click [here](https://unit15project2.herokuapp.com) to visit the website!
 
 Slideshow presentation link: https://docs.google.com/presentation/d/1n3---Wv6lzACx1w-lfM9C0NcFJBhUluBjw_pKIR6un0/edit?usp=sharing
