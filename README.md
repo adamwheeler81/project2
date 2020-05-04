@@ -1,4 +1,6 @@
-TICKR
+# TICKR
+
+![TICKR screenshot](tickr.png)
 
 As a consumer, I want access to various news outlets. I want the freedom to search specific topics and have a multitude of results to choose from.
 The user will be prompted with a web authentication and will be able to save articles
